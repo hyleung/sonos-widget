@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BABF7CAF1C7D9FE5A24E4205 /* Pods_sonos_widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3856E0BDD5AD32C609CED33A /* Pods_sonos_widget.framework */; };
 		F02C42D01C2FB09D00E4F20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42CF1C2FB09D00E4F20C /* AppDelegate.swift */; };
 		F02C42D21C2FB09D00E4F20C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42D11C2FB09D00E4F20C /* ViewController.swift */; };
 		F02C42D51C2FB09D00E4F20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D31C2FB09D00E4F20C /* Main.storyboard */; };
 		F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D61C2FB09D00E4F20C /* Assets.xcassets */; };
 		F02C42DA1C2FB09D00E4F20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D81C2FB09D00E4F20C /* LaunchScreen.storyboard */; };
 		F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */; };
+		F02C42F01C31081000E4F20C /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42EF1C31081000E4F20C /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C0604C3F2F0AED5AFA3F3CD /* Pods-sonos-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sonos-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sonos-widget/Pods-sonos-widget.debug.xcconfig"; sourceTree = "<group>"; };
+		30D1EF7F2802041BD258926A /* Pods-sonos-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sonos-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-sonos-widget/Pods-sonos-widget.release.xcconfig"; sourceTree = "<group>"; };
+		3856E0BDD5AD32C609CED33A /* Pods_sonos_widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sonos_widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C42CC1C2FB09D00E4F20C /* sonos-widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sonos-widget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C42CF1C2FB09D00E4F20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F02C42D11C2FB09D00E4F20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +41,7 @@
 		F02C42E01C2FB09D00E4F20C /* sonos-widgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sonos-widgetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sonos_widgetTests.swift; sourceTree = "<group>"; };
 		F02C42E61C2FB09D00E4F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F02C42EF1C31081000E4F20C /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BABF7CAF1C7D9FE5A24E4205 /* Pods_sonos_widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +63,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35764BA98109B3A2BC0D8309 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3856E0BDD5AD32C609CED33A /* Pods_sonos_widget.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		777D32D514D05709C293ED4F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C0604C3F2F0AED5AFA3F3CD /* Pods-sonos-widget.debug.xcconfig */,
+				30D1EF7F2802041BD258926A /* Pods-sonos-widget.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F02C42C31C2FB09D00E4F20C = {
 			isa = PBXGroup;
 			children = (
 				F02C42CE1C2FB09D00E4F20C /* sonos-widget */,
 				F02C42E31C2FB09D00E4F20C /* sonos-widgetTests */,
 				F02C42CD1C2FB09D00E4F20C /* Products */,
+				777D32D514D05709C293ED4F /* Pods */,
+				35764BA98109B3A2BC0D8309 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +103,7 @@
 		F02C42CE1C2FB09D00E4F20C /* sonos-widget */ = {
 			isa = PBXGroup;
 			children = (
+				F02C42EF1C31081000E4F20C /* Package.swift */,
 				F02C42CF1C2FB09D00E4F20C /* AppDelegate.swift */,
 				F02C42D11C2FB09D00E4F20C /* ViewController.swift */,
 				F02C42D31C2FB09D00E4F20C /* Main.storyboard */,
@@ -103,9 +130,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F02C42E91C2FB09D00E4F20C /* Build configuration list for PBXNativeTarget "sonos-widget" */;
 			buildPhases = (
+				CCD968F13C3AEF34A4792C0B /* Check Pods Manifest.lock */,
 				F02C42C81C2FB09D00E4F20C /* Sources */,
 				F02C42C91C2FB09D00E4F20C /* Frameworks */,
 				F02C42CA1C2FB09D00E4F20C /* Resources */,
+				E069572C43DCE69D5AAFDCD0 /* Embed Pods Frameworks */,
+				E287DC34B8F30043F3A1D8FA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,11 +222,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CCD968F13C3AEF34A4792C0B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E069572C43DCE69D5AAFDCD0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sonos-widget/Pods-sonos-widget-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E287DC34B8F30043F3A1D8FA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-sonos-widget/Pods-sonos-widget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F02C42C81C2FB09D00E4F20C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F02C42F01C31081000E4F20C /* Package.swift in Sources */,
 				F02C42D21C2FB09D00E4F20C /* ViewController.swift in Sources */,
 				F02C42D01C2FB09D00E4F20C /* AppDelegate.swift in Sources */,
 			);
@@ -325,6 +404,7 @@
 		};
 		F02C42EA1C2FB09D00E4F20C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C0604C3F2F0AED5AFA3F3CD /* Pods-sonos-widget.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "sonos-widget/Info.plist";
@@ -336,6 +416,7 @@
 		};
 		F02C42EB1C2FB09D00E4F20C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30D1EF7F2802041BD258926A /* Pods-sonos-widget.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "sonos-widget/Info.plist";
@@ -388,6 +469,7 @@
 				F02C42EB1C2FB09D00E4F20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F02C42EC1C2FB09D00E4F20C /* Build configuration list for PBXNativeTarget "sonos-widgetTests" */ = {
 			isa = XCConfigurationList;
@@ -396,6 +478,7 @@
 				F02C42EE1C2FB09D00E4F20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
