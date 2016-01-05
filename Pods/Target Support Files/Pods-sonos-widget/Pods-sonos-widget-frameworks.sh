@@ -84,8 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-sonos-widget/Socket_IO_Client_Swift.framework"
+  install_framework "Pods-sonos-widget/CocoaAsyncSocket.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-sonos-widget/Socket_IO_Client_Swift.framework"
+  install_framework "Pods-sonos-widget/CocoaAsyncSocket.framework"
 fi

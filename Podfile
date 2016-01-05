@@ -4,7 +4,7 @@
 use_frameworks!
 
 target 'sonos-widget' do
-    pod 'Socket.IO-Client-Swift', '~>4.1.6'
+    pod 'CocoaAsyncSocket'
 end
 
 target 'sonos-widgetTests' do

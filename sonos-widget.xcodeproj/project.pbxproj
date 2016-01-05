@@ -14,7 +14,6 @@
 		F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D61C2FB09D00E4F20C /* Assets.xcassets */; };
 		F02C42DA1C2FB09D00E4F20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D81C2FB09D00E4F20C /* LaunchScreen.storyboard */; };
 		F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */; };
-		F02C42F01C31081000E4F20C /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42EF1C31081000E4F20C /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +40,6 @@
 		F02C42E01C2FB09D00E4F20C /* sonos-widgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sonos-widgetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sonos_widgetTests.swift; sourceTree = "<group>"; };
 		F02C42E61C2FB09D00E4F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F02C42EF1C31081000E4F20C /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +101,6 @@
 		F02C42CE1C2FB09D00E4F20C /* sonos-widget */ = {
 			isa = PBXGroup;
 			children = (
-				F02C42EF1C31081000E4F20C /* Package.swift */,
 				F02C42CF1C2FB09D00E4F20C /* AppDelegate.swift */,
 				F02C42D11C2FB09D00E4F20C /* ViewController.swift */,
 				F02C42D31C2FB09D00E4F20C /* Main.storyboard */,
@@ -275,7 +272,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F02C42F01C31081000E4F20C /* Package.swift in Sources */,
 				F02C42D21C2FB09D00E4F20C /* ViewController.swift in Sources */,
 				F02C42D01C2FB09D00E4F20C /* AppDelegate.swift in Sources */,
 			);
