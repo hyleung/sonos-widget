@@ -13,26 +13,39 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var myLabel: UILabel?
-    var discoveryClient:SonosDiscoveryClient?
-
+    var discoveryClient:SonosDiscoveryClient
     
+    required init?(coder aDecoder:NSCoder) {
+        discoveryClient = SonosDiscoveryClient(onSuccess: { (s:String) -> () in
+            print(s)
+            }, onFailure: { (err: NSError) -> () in
+                print(err)
+        });
+        super.init(coder: aDecoder)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        discoveryClient = SonosDiscoveryClient(onSuccess: { (s:String) -> () in
+            print(s)
+            }, onFailure: { (err: NSError) -> () in
+                print(err)
+        });
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         if let l = myLabel {
             l.text = "bar"
         }
-        discoveryClient = SonosDiscoveryClient(onSuccess: { (s:String) -> () in
-            print(s)
-            }, onFailure: { (err: NSError) -> () in
-                print(err)
-        });
-        discoveryClient?.performDiscovery()
+        discoveryClient.performDiscovery()
 
     }
 
     override func viewWillDisappear(animated: Bool) {
-        discoveryClient?.unbind()
+        discoveryClient.unbind()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
