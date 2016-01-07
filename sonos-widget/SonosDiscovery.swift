@@ -8,19 +8,15 @@
 
 import CocoaAsyncSocket
 
-class SonosDiscoveryClient: GCDAsyncUdpSocketDelegate {
+class SonosDiscoveryClient {
  
     var socket:GCDAsyncUdpSocket?
-    var onSuccess:(String) -> ()
-    var onFailure:(NSError) -> ()
+    var socketDelegate:SocketDelegate?
     
-    init(onSuccess:(String) -> (), onFailure:(NSError) -> ()) {
-        self.onSuccess = onSuccess
-        self.onFailure = onFailure
-    }
-    
-    func performDiscovery() {
-        socket = GCDAsyncUdpSocket(delegate:self, delegateQueue:dispatch_get_main_queue())
+    func performDiscovery(onSuccess:(String) -> (), onFailure:(NSError) -> ()) {
+
+        socketDelegate = SocketDelegate(onSuccess: onSuccess, onFailure: onFailure)
+        socket = GCDAsyncUdpSocket(delegate:socketDelegate, delegateQueue:dispatch_get_main_queue())
         do {
             try socket?.bindToPort(1900)
             try socket?.joinMulticastGroup("239.255.255.250")
@@ -37,13 +33,7 @@ class SonosDiscoveryClient: GCDAsyncUdpSocketDelegate {
         }
     }
     
-    @objc func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
-        let s = String(data:data, encoding: NSUTF8StringEncoding)
-        if (s!.containsString("Sonos")) {
-            print("Received")
-            onSuccess(s!)
-        }
-    }
+
     
     func unbind() {
         do {
@@ -51,6 +41,22 @@ class SonosDiscoveryClient: GCDAsyncUdpSocketDelegate {
             print("left multi-cast group")
         } catch let error as NSError {
             print("failed \(error)")
+        }
+    }
+}
+
+class SocketDelegate:GCDAsyncUdpSocketDelegate {
+    var onSuccess:(String) -> ()
+    var onFailure:(NSError) -> ()
+    init(onSuccess:(String) -> (), onFailure:(NSError) -> ()) {
+        self.onSuccess = onSuccess
+        self.onFailure = onFailure
+    }
+    @objc func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
+        let s = String(data:data, encoding: NSUTF8StringEncoding)
+        if (s!.containsString("Sonos")) {
+            print("Received")
+            onSuccess(s!)
         }
     }
 }

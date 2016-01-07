@@ -13,25 +13,8 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var myLabel: UILabel?
-    var discoveryClient:SonosDiscoveryClient
-    
-    required init?(coder aDecoder:NSCoder) {
-        discoveryClient = SonosDiscoveryClient(onSuccess: { (s:String) -> () in
-            print(s)
-            }, onFailure: { (err: NSError) -> () in
-                print(err)
-        });
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        discoveryClient = SonosDiscoveryClient(onSuccess: { (s:String) -> () in
-            print(s)
-            }, onFailure: { (err: NSError) -> () in
-                print(err)
-        });
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
+    var discoveryClient:SonosDiscoveryClient?
+
     
 
     override func viewDidLoad() {
@@ -40,12 +23,17 @@ class ViewController: UIViewController {
         if let l = myLabel {
             l.text = "bar"
         }
-        discoveryClient.performDiscovery()
+        discoveryClient = SonosDiscoveryClient()
+        discoveryClient?.performDiscovery({ (s:String) -> () in
+            print(s)
+            }, onFailure: { (err: NSError) -> () in
+                print(err)
+        })
 
     }
 
     override func viewWillDisappear(animated: Bool) {
-        discoveryClient.unbind()
+        discoveryClient?.unbind()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
