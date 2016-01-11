@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaAsyncSocket
+import XCGLogger
 
 class ViewController: UIViewController {
 
@@ -19,15 +20,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         if let l = myLabel {
             l.text = "bar"
         }
         discoveryClient = SonosDiscoveryClient()
         discoveryClient?.performDiscovery({ (s:String) -> () in
-            print(s)
+            log.info(s)
             }, onFailure: { (err: NSError) -> () in
-                print(err)
+                log.error("\(err)")
         })
 
     }
