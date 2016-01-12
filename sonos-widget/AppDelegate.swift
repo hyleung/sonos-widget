@@ -10,7 +10,7 @@ import UIKit
 import XCGLogger
 
 //Logger
-let log:XCGLogger = {
+let logger:XCGLogger = {
     let log = XCGLogger.defaultInstance()
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:sss"
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        log.setup()
+        logger.setup()
         return true
     }
 

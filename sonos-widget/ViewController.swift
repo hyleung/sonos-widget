@@ -9,6 +9,8 @@
 import UIKit
 import CocoaAsyncSocket
 import XCGLogger
+import RxSwift
+import RxCocoa
 
 class ViewController: UIViewController {
 
@@ -26,12 +28,20 @@ class ViewController: UIViewController {
             l.text = "bar"
         }
         discoveryClient = SonosDiscoveryClient()
-        discoveryClient?.performDiscovery({ (s:String) -> () in
-            log.info(s)
-            }, onFailure: { (err: NSError) -> () in
-                log.error("\(err)")
-        })
-
+        discoveryClient?
+            .performDiscovery()
+            .take(1)
+            .subscribe(onNext: { (s) -> Void in
+                logger.info("Success: \(s)")
+                }, onError: { (e) -> Void in
+                    logger.error("Error: \(e)")
+                }, onCompleted: { () -> Void in
+                    logger.verbose("completed")
+                }, onDisposed: { () -> Void in
+                    logger.verbose("disposed")
+            })
+        
+    
     }
 
     override func viewWillDisappear(animated: Bool) {
