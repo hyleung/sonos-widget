@@ -17,28 +17,39 @@ class SonosDiscoveryClient {
     
     func performDiscovery() -> Observable<String> {
         socket = GCDAsyncUdpSocket(delegate:nil, delegateQueue:dispatch_get_main_queue())
-        return rxDiscovery(socket!)
+        let msg = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
+        return rxSendMulticast(socket!, host:"239.255.255.250", port:1900, message: msg)
             .map{ data in
                 return String(data:data, encoding: NSUTF8StringEncoding)!
             }.filter{ s in
                 return s.containsString("Sonos")
-        }
+            }.take(1)
+            . doOn(onNext: { (s:String) -> Void in
+
+                }, onError: { (err) -> Void in
+                    logger.error("Error: \(err)")
+                    logger.debug("leaving multicast group")
+                    try self.socket?.leaveMulticastGroup("239.255.255.250")
+                }, onCompleted: { () -> Void in
+                    logger.debug("completed")
+                    logger.debug("leaving multicast group")
+                    try self.socket?.leaveMulticastGroup("239.255.255.250")
+            })
     }
     
     
-    func rxDiscovery(socket:GCDAsyncUdpSocket) -> Observable<NSData> {
+    private func rxSendMulticast(socket:GCDAsyncUdpSocket, host:String, port:UInt16, message:String) -> Observable<NSData> {
         return Observable.create{ observer -> Disposable in {
             logger.debug("creating observable")
             
             do {
                 socket.rx_data.subscribe(observer)
-                try socket.bindToPort(1900)
-                try socket.joinMulticastGroup("239.255.255.250")
+                try socket.bindToPort(port)
+                try socket.joinMulticastGroup(host)
                 logger.debug("joined multi-cast group")
-                let message = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
                 let data = message.dataUsingEncoding(NSUTF8StringEncoding)
                 try socket.beginReceiving()
-                socket.sendData(data, toHost: "239.255.255.250" , port: 1900, withTimeout: 100, tag: 0)
+                socket.sendData(data, toHost: host , port: port, withTimeout: 100, tag: 0)
                 logger.debug("sent")
                 
             } catch let err as NSError {
@@ -47,18 +58,7 @@ class SonosDiscoveryClient {
                 return NopDisposable.instance
             }()
         }
-    }
-
-    
-    func unbind() {
-        do {
-            try socket?.leaveMulticastGroup("239.255.255.250")
-            logger.debug("left multi-cast group")
-        } catch let error as NSError {
-            logger.error("failed \(error)")
-        }
-    }
-    
+    }    
 
 }
 

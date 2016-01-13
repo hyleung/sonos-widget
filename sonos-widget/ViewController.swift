@@ -30,7 +30,6 @@ class ViewController: UIViewController {
         discoveryClient = SonosDiscoveryClient()
         discoveryClient?
             .performDiscovery()
-            .take(1)
             .subscribe(onNext: { (s) -> Void in
                 logger.info("Success: \(s)")
                 }, onError: { (e) -> Void in
@@ -45,7 +44,7 @@ class ViewController: UIViewController {
     }
 
     override func viewWillDisappear(animated: Bool) {
-        discoveryClient?.unbind()
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
