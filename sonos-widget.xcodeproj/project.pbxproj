@@ -12,7 +12,6 @@
 		F02C42D21C2FB09D00E4F20C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42D11C2FB09D00E4F20C /* ViewController.swift */; };
 		F02C42D51C2FB09D00E4F20C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D31C2FB09D00E4F20C /* Main.storyboard */; };
 		F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D61C2FB09D00E4F20C /* Assets.xcassets */; };
-		F02C42DA1C2FB09D00E4F20C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D81C2FB09D00E4F20C /* LaunchScreen.storyboard */; };
 		F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */; };
 		F0D0BB241C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0BB231C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift */; };
 		F0D0BB261C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0BB251C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift */; };
@@ -38,7 +37,6 @@
 		F02C42D11C2FB09D00E4F20C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F02C42D41C2FB09D00E4F20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F02C42D61C2FB09D00E4F20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F02C42D91C2FB09D00E4F20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F02C42DB1C2FB09D00E4F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F02C42E01C2FB09D00E4F20C /* sonos-widgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sonos-widgetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sonos_widgetTests.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				F02C42D11C2FB09D00E4F20C /* ViewController.swift */,
 				F02C42D31C2FB09D00E4F20C /* Main.storyboard */,
 				F02C42D61C2FB09D00E4F20C /* Assets.xcassets */,
-				F02C42D81C2FB09D00E4F20C /* LaunchScreen.storyboard */,
 				F02C42DB1C2FB09D00E4F20C /* Info.plist */,
 				F0FBBAFE1C3B7137000C904C /* SonosDiscovery.swift */,
 			);
@@ -229,7 +226,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F02C42DA1C2FB09D00E4F20C /* LaunchScreen.storyboard in Resources */,
 				F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */,
 				F02C42D51C2FB09D00E4F20C /* Main.storyboard in Resources */,
 			);
@@ -330,14 +326,6 @@
 				F02C42D41C2FB09D00E4F20C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F02C42D81C2FB09D00E4F20C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F02C42D91C2FB09D00E4F20C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

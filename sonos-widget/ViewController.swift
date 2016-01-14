@@ -15,18 +15,16 @@ import RxCocoa
 class ViewController: UIViewController {
 
     
-    @IBOutlet weak var myLabel: UILabel?
+    @IBOutlet weak var tableView: UITableView!
     var discoveryClient:SonosDiscoveryClient?
 
-    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        if let l = myLabel {
-            l.text = "bar"
-        }
+
         discoveryClient = SonosDiscoveryClient()
         discoveryClient?
             .performDiscovery()
@@ -40,7 +38,15 @@ class ViewController: UIViewController {
                     logger.verbose("disposed")
             })
         
-    
+        let items = Observable.just([
+                "One",
+                "Two",
+                "Three"
+            ])
+
+        items.bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
+                cell.textLabel?.text = "\(element) @ row \(row)"
+        }.addDisposableTo(disposeBag)
     }
 
     override func viewWillDisappear(animated: Bool) {
