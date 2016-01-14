@@ -16,7 +16,6 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var tableView: UITableView!
-    var discoveryClient:SonosDiscoveryClient?
 
     var disposeBag = DisposeBag()
     
@@ -24,29 +23,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-
-        discoveryClient = SonosDiscoveryClient()
-        discoveryClient?
+        SonosDiscoveryClient()
             .performDiscovery()
-            .subscribe(onNext: { (s) -> Void in
-                logger.info("Success: \(s)")
-                }, onError: { (e) -> Void in
-                    logger.error("Error: \(e)")
-                }, onCompleted: { () -> Void in
-                    logger.verbose("completed")
-                }, onDisposed: { () -> Void in
-                    logger.verbose("disposed")
-            })
-        
-        let items = Observable.just([
-                "One",
-                "Two",
-                "Three"
-            ])
+            .doOn(onNext: { (s:String) in logger.info(s) }, onError: nil , onCompleted: nil)
+            .toArray()
+            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
+                    cell.textLabel?.text = "\(element) @ row \(row)"
+            }.addDisposableTo(disposeBag)
 
-        items.bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
-                cell.textLabel?.text = "\(element) @ row \(row)"
-        }.addDisposableTo(disposeBag)
     }
 
     override func viewWillDisappear(animated: Bool) {
