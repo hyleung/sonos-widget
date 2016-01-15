@@ -37,6 +37,9 @@ class SonosDiscoveryClient {
             })
     }
     
+    func parseDiscoveryResponse(resonse:Observable<String>) -> Observable<Dictionary<String,String>> {
+        return Observable.error(NSError(domain: "not implemented", code: 0, userInfo: nil))
+    }
     
     private func rxSendMulticast(socket:GCDAsyncUdpSocket, host:String, port:UInt16, message:String) -> Observable<NSData> {
         return Observable.create{ observer -> Disposable in {
