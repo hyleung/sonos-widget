@@ -37,9 +37,27 @@ class SonosDiscoveryClient {
             })
     }
     
-    func parseDiscoveryResponse(resonse:Observable<String>) -> Observable<Dictionary<String,String>> {
-        return Observable.error(NSError(domain: "not implemented", code: 0, userInfo: nil))
+    func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
+        return response.map{ s in self.lines(s) }
+            .map{ line in self.parseMap(line) }
     }
+    
+    private func lines(s:String) -> [String] {
+        return s.characters.split{$0 == "\n"}.map{String($0)}
+    }
+    
+    private func parseMap(lines:[String]) -> Dictionary<String,String> {
+        var result:Dictionary<String,String> = Dictionary()
+        for line in lines {
+            if let idx = line.characters.indexOf(":") {
+                let k = line.substringToIndex(idx)
+                let v = line.substringFromIndex(idx)
+                result[k] = v
+            }
+        }
+        return result
+    }
+    
     
     private func rxSendMulticast(socket:GCDAsyncUdpSocket, host:String, port:UInt16, message:String) -> Observable<NSData> {
         return Observable.create{ observer -> Disposable in {
