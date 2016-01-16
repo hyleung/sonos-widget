@@ -51,7 +51,7 @@ class SonosDiscoveryClient {
         for line in lines {
             if let idx = line.characters.indexOf(":") {
                 let k = line.substringToIndex(idx)
-                let v = String(line.substringFromIndex(idx).characters.dropFirst())
+                let v = String(line.substringFromIndex(idx.advancedBy(1)).characters.dropFirst())
                 result[k] = v
             }
         }
