@@ -23,12 +23,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        SonosDiscoveryClient()
-            .performDiscovery()
-            .doOn(onNext: { (s:String) in logger.info(s) }, onError: nil , onCompleted: nil)
+        SonosDiscoveryClient.parseDiscoveryResponse(SonosDiscoveryClient()
+            .performDiscovery())
             .toArray()
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
-                    cell.textLabel?.text = "\(element) @ row \(row)"
+                if let location = element["LOCATION"] {
+                    cell.textLabel?.text = "\(location) @ row \(row)"
+                } else {
+                    cell.textLabel?.text = "No location @ row \(row)"
+                }
+                
             }.addDisposableTo(disposeBag)
 
     }

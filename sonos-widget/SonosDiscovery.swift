@@ -37,21 +37,21 @@ class SonosDiscoveryClient {
             })
     }
     
-    func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
+    static func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
         return response.map{ s in self.lines(s) }
             .map{ line in self.parseMap(line) }
     }
     
-    private func lines(s:String) -> [String] {
-        return s.characters.split{$0 == "\n"}.map{String($0)}
+    static private func lines(s:String) -> [String] {
+        return s.characters.split{$0 == "\r\n"}.map{String($0)}
     }
     
-    private func parseMap(lines:[String]) -> Dictionary<String,String> {
+    static private func parseMap(lines:[String]) -> Dictionary<String,String> {
         var result:Dictionary<String,String> = Dictionary()
         for line in lines {
             if let idx = line.characters.indexOf(":") {
                 let k = line.substringToIndex(idx)
-                let v = line.substringFromIndex(idx)
+                let v = String(line.substringFromIndex(idx).characters.dropFirst())
                 result[k] = v
             }
         }
