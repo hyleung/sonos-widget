@@ -9,6 +9,7 @@ target 'sonos-widget' do
     pod 'RxCocoa',    '~> 2.0'
     pod 'RxBlocking', '~> 2.0'
     pod 'XCGLogger', '~> 3.2'
+    pod 'AEXML', '~> 2.0.1'
 end
 
 target 'sonos-widgetTests' do

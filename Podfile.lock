@@ -1,4 +1,5 @@
 PODS:
+  - AEXML (2.0.1)
   - CocoaAsyncSocket (7.4.2)
   - RxBlocking (2.0.0):
     - RxSwift (~> 2.0)
@@ -8,6 +9,7 @@ PODS:
   - XCGLogger (3.2)
 
 DEPENDENCIES:
+  - AEXML (~> 2.0.1)
   - CocoaAsyncSocket
   - RxBlocking (~> 2.0)
   - RxCocoa (~> 2.0)
@@ -15,6 +17,7 @@ DEPENDENCIES:
   - XCGLogger (~> 3.2)
 
 SPEC CHECKSUMS:
+  AEXML: d6bb5b994521fcf3667ee8ccc1ed533f31b19218
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f

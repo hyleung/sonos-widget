@@ -14,6 +14,8 @@
 		F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D61C2FB09D00E4F20C /* Assets.xcassets */; };
 		F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */; };
 		F038F2491C4892A80083053E /* SonosDiscoveryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */; };
+		F038F24D1C4AB94E0083053E /* SonosCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F24C1C4AB94E0083053E /* SonosCommand.swift */; };
+		F038F24F1C4ABAA50083053E /* SonosCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */; };
 		F0D0BB241C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0BB231C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift */; };
 		F0D0BB261C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0BB251C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift */; };
 		F0FBBAFF1C3B7137000C904C /* SonosDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBBAFE1C3B7137000C904C /* SonosDiscovery.swift */; };
@@ -43,6 +45,8 @@
 		F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sonos_widgetTests.swift; sourceTree = "<group>"; };
 		F02C42E61C2FB09D00E4F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosDiscoveryTest.swift; sourceTree = "<group>"; };
+		F038F24C1C4AB94E0083053E /* SonosCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosCommand.swift; sourceTree = "<group>"; };
+		F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosCommandTest.swift; sourceTree = "<group>"; };
 		F0D0BB231C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGCDAsyncUdpSocketDelegateProxy.swift; sourceTree = "<group>"; };
 		F0D0BB251C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GCDAsyncUdpSocket+Rx.swift"; sourceTree = "<group>"; };
 		F0FBBAFE1C3B7137000C904C /* SonosDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosDiscovery.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				F02C42D61C2FB09D00E4F20C /* Assets.xcassets */,
 				F02C42DB1C2FB09D00E4F20C /* Info.plist */,
 				F0FBBAFE1C3B7137000C904C /* SonosDiscovery.swift */,
+				F038F24C1C4AB94E0083053E /* SonosCommand.swift */,
 			);
 			path = "sonos-widget";
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 				F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */,
 				F02C42E61C2FB09D00E4F20C /* Info.plist */,
 				F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */,
+				F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */,
 			);
 			path = "sonos-widgetTests";
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F038F24D1C4AB94E0083053E /* SonosCommand.swift in Sources */,
 				F02C42D21C2FB09D00E4F20C /* ViewController.swift in Sources */,
 				F0D0BB261C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift in Sources */,
 				F02C42D01C2FB09D00E4F20C /* AppDelegate.swift in Sources */,
@@ -310,6 +317,7 @@
 			files = (
 				F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */,
 				F038F2491C4892A80083053E /* SonosDiscoveryTest.swift in Sources */,
+				F038F24F1C4ABAA50083053E /* SonosCommandTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
