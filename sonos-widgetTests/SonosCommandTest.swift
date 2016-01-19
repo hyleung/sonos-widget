@@ -23,10 +23,22 @@ class SonosCommandTest: XCTestCase {
     func testShouldSerializeToSoapRequest() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let s = SonosCommand(serviceType: "ZoneGroupTopology", version: 1, action: "GetZoneGroupState", arguments: .None)
+        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
         print("xml: \(s.asXml()!)")
         XCTAssertNotNil(s.asXml())
     }
 
+    func testSoapRequestShouldContain() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+        XCTAssertTrue(s.asXml()!.containsString(s.actionHeader()))
+        XCTAssertNotNil(s.asXml())
+    }
+    
+    func testShouldReturnActionHeader() {
+        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+        XCTAssertEqual("urn:schemas-upnp-org:service:serviceType:ZoneGroupTopology:1#GetZoneGroupState", s.actionHeader())
+    }
 
 }
