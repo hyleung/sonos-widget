@@ -6,6 +6,7 @@ PODS:
   - RxCocoa (2.0.0):
     - RxSwift (~> 2.0)
   - RxSwift (2.0.0)
+  - SwiftClient (2.0.2)
   - XCGLogger (3.2)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - RxBlocking (~> 2.0)
   - RxCocoa (~> 2.0)
   - RxSwift (~> 2.0)
+  - SwiftClient (~> 2.0.2)
   - XCGLogger (~> 3.2)
 
 SPEC CHECKSUMS:
@@ -22,6 +24,7 @@ SPEC CHECKSUMS:
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
   RxSwift: d83246efa6f16c50c143bec134649d045498f601
+  SwiftClient: 9742e8441d59bb6d24d3f6b047ec1d68aa3b24e8
   XCGLogger: da1f341f4bb8979db6e1df64232f04d9698402d4
 
 COCOAPODS: 0.39.0

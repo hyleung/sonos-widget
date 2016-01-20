@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftClient
 @testable import sonos_widget
 class SonosCommandTest: XCTestCase {
 
@@ -24,7 +25,7 @@ class SonosCommandTest: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
-        print("xml: \(s.asXml()!)")
+        logger.debug("xml: \(s.asXml()!)")
         XCTAssertNotNil(s.asXml())
     }
 
@@ -39,6 +40,22 @@ class SonosCommandTest: XCTestCase {
     func testShouldReturnActionHeader() {
         let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
         XCTAssertEqual("urn:schemas-upnp-org:service:serviceType:ZoneGroupTopology:1#GetZoneGroupState", s.actionHeader())
+    }
+    
+    func testPostRequest() {
+        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+
+        let observable = SonosApiClient.executeAction({ () in return Client()}, baseUrl: "http://192.168.1.74:1400", path: "/ZoneGroupTopology/Control", command: s)
+        do {
+            let result = try observable.toBlocking().first()
+            logger.debug(closure: { () in
+                return (NSString(data:result!, encoding:NSUTF8StringEncoding)! as String)
+            })
+            XCTAssertNotNil(result)
+        } catch let err as NSError {
+            XCTFail("failed: \(err.domain)")
+        }
+
     }
 
 }

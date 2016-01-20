@@ -1,0 +1,6 @@
+framework module SwiftClient {
+  umbrella header "SwiftClient-umbrella.h"
+
+  export *
+  module * { export * }
+}

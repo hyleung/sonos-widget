@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-sonos-widget/RxBlocking.framework"
   install_framework "Pods-sonos-widget/RxCocoa.framework"
   install_framework "Pods-sonos-widget/RxSwift.framework"
+  install_framework "Pods-sonos-widget/SwiftClient.framework"
   install_framework "Pods-sonos-widget/XCGLogger.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -97,5 +98,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-sonos-widget/RxBlocking.framework"
   install_framework "Pods-sonos-widget/RxCocoa.framework"
   install_framework "Pods-sonos-widget/RxSwift.framework"
+  install_framework "Pods-sonos-widget/SwiftClient.framework"
   install_framework "Pods-sonos-widget/XCGLogger.framework"
 fi

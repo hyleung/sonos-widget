@@ -10,6 +10,7 @@ target 'sonos-widget' do
     pod 'RxBlocking', '~> 2.0'
     pod 'XCGLogger', '~> 3.2'
     pod 'AEXML', '~> 2.0.1'
+    pod 'SwiftClient', '~> 2.0.2'
 end
 
 target 'sonos-widgetTests' do

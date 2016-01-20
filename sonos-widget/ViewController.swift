@@ -34,7 +34,7 @@ class ViewController: UIViewController {
                 }
                 
             }.addDisposableTo(disposeBag)
-
+        
     }
 
     override func viewWillDisappear(animated: Bool) {

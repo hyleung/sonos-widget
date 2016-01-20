@@ -37,6 +37,10 @@ class SonosDiscoveryClient {
             })
     }
     
+    static func performZoneQuery() -> Observable<String> {
+        return Observable.empty()
+    }
+    
     static func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
         return response.map{ s in self.lines(s) }
             .map{ line in self.parseMap(line) }
