@@ -37,8 +37,18 @@ class SonosDiscoveryClient {
             })
     }
     
-    static func performZoneQuery() -> Observable<String> {
-        return Observable.empty()
+    func performZoneQuery() -> Observable<String> {
+        return SonosDiscoveryClient.parseDiscoveryResponse(SonosDiscoveryClient()
+            .performDiscovery())
+            .flatMap({resp -> Observable<String> in
+                if let location = resp["LOCATION"] {
+                    if let url = NSURL(string: location) {
+                        let baseUrl = "http://\(url.host!):\(url.port!)"
+                        return Observable.just(baseUrl)
+                    }
+                }
+                return Observable.empty()
+            })
     }
     
     static func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
