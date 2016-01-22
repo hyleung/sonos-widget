@@ -11,7 +11,8 @@ import CocoaAsyncSocket
 import XCGLogger
 import RxSwift
 import RxCocoa
-
+import SwiftClient
+import AEXML
 class ViewController: UIViewController {
 
     
@@ -25,9 +26,37 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         SonosDiscoveryClient
             .performZoneQuery()
-            .toArray()
+            .flatMap( {location -> Observable<NSData> in
+                let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+                return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
+            })
+            .flatMap({ soapResponse -> Observable<AEXMLDocument> in
+                do {
+                    return Observable.just(try AEXMLDocument(xmlData: soapResponse))
+                } catch let err as NSError {
+                    return Observable.error(err)
+                }
+            })
+            .map({ xml -> String in
+                return xml["s:Envelope"]["s:Body"]["u:GetZoneGroupStateResponse"]["ZoneGroupState"]
+                    .xmlString
+                    .stringByReplacingOccurrencesOfString("&lt;", withString: "<")
+                    .stringByReplacingOccurrencesOfString("&gt;", withString: ">")
+                    .stringByReplacingOccurrencesOfString("&quot;", withString: "'")
+                    .stringByReplacingOccurrencesOfString("\t", withString: "")
+                    .stringByReplacingOccurrencesOfString("\r", withString: "")
+            })
+            .map({ zoneGroupState -> [AEXMLElement] in
+                let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
+                return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
+            })
+            .map({ elements -> [String] in
+                return elements.map({element in element.attributes["ID"]!})
+            })
+            .observeOn(MainScheduler.instance)
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
-                    cell.textLabel?.text = "\(element) @ row \(row)"
+                    logger.info(element)
+                    cell.textLabel?.text = "\(element)"
             }.addDisposableTo(disposeBag)
         
     }
