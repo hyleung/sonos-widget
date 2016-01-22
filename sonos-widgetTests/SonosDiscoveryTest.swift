@@ -25,11 +25,8 @@ class SonosDiscoveryTest: XCTestCase {
         "X-RINCON-BOOTSEQ: 40\r\n" +
     "X-RINCON-WIFIMODE: 0\r\n"
     
-    var client:SonosDiscoveryClient?
     override func setUp() {
         super.setUp()
-        client = SonosDiscoveryClient()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {

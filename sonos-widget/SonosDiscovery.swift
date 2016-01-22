@@ -11,12 +11,10 @@ import RxCocoa
 import XCGLogger
 
 class SonosDiscoveryClient {
- 
-    var socket:GCDAsyncUdpSocket?
 
-    
-    func performDiscovery() -> Observable<String> {
-        socket = GCDAsyncUdpSocket(delegate:nil, delegateQueue:dispatch_get_main_queue())
+    static func performDiscovery() -> Observable<String> {
+
+        let socket = GCDAsyncUdpSocket(delegate:nil, delegateQueue:dispatch_get_main_queue())
         let msg = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
         return rxSendMulticast(socket!, host:"239.255.255.250", port:1900, message: msg)
             .map{ data in
@@ -29,16 +27,16 @@ class SonosDiscoveryClient {
                 }, onError: { (err) -> Void in
                     logger.error("Error: \(err)")
                     logger.debug("leaving multicast group")
-                    try self.socket?.leaveMulticastGroup("239.255.255.250")
+                    try socket?.leaveMulticastGroup("239.255.255.250")
                 }, onCompleted: { () -> Void in
                     logger.debug("completed")
                     logger.debug("leaving multicast group")
-                    try self.socket?.leaveMulticastGroup("239.255.255.250")
+                    try socket?.leaveMulticastGroup("239.255.255.250")
             })
     }
     
-    func performZoneQuery() -> Observable<String> {
-        return SonosDiscoveryClient.parseDiscoveryResponse(SonosDiscoveryClient()
+    static func performZoneQuery() -> Observable<String> {
+        return SonosDiscoveryClient.parseDiscoveryResponse(SonosDiscoveryClient
             .performDiscovery())
             .flatMap({resp -> Observable<String> in
                 if let location = resp["LOCATION"] {
@@ -73,7 +71,7 @@ class SonosDiscoveryClient {
     }
     
     
-    private func rxSendMulticast(socket:GCDAsyncUdpSocket, host:String, port:UInt16, message:String) -> Observable<NSData> {
+    static private func rxSendMulticast(socket:GCDAsyncUdpSocket, host:String, port:UInt16, message:String) -> Observable<NSData> {
         return Observable.create{ observer -> Disposable in {
             logger.debug("creating observable")
             
