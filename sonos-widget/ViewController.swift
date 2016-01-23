@@ -39,12 +39,7 @@ class ViewController: UIViewController {
             })
             .map({ xml -> String in
                 return xml["s:Envelope"]["s:Body"]["u:GetZoneGroupStateResponse"]["ZoneGroupState"]
-                    .xmlString
-                    .stringByReplacingOccurrencesOfString("&lt;", withString: "<")
-                    .stringByReplacingOccurrencesOfString("&gt;", withString: ">")
-                    .stringByReplacingOccurrencesOfString("&quot;", withString: "'")
-                    .stringByReplacingOccurrencesOfString("\t", withString: "")
-                    .stringByReplacingOccurrencesOfString("\r", withString: "")
+                    .xmlString.unescapeXml()
             })
             .map({ zoneGroupState -> [AEXMLElement] in
                 let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
