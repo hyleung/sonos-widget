@@ -13,26 +13,8 @@ import XCGLogger
 class SonosDiscoveryClient {
 
     static func performDiscovery() -> Observable<String> {
-
-        let socket = GCDAsyncUdpSocket(delegate:nil, delegateQueue:dispatch_get_main_queue())
         let msg = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
-        return rxSendMulticast(socket!, host:"239.255.255.250", port:1900, message: msg)
-            .map{ data in
-                return String(data:data, encoding: NSUTF8StringEncoding)!
-            }.filter{ s in
-                return s.containsString("Sonos")
-            }.take(1)
-            . doOn(onNext: { (s:String) -> Void in
-
-                }, onError: { (err) -> Void in
-                    logger.error("Error: \(err)")
-                    logger.debug("leaving multicast group")
-                    try socket?.leaveMulticastGroup("239.255.255.250")
-                }, onCompleted: { () -> Void in
-                    logger.debug("completed")
-                    logger.debug("leaving multicast group")
-                    try socket?.leaveMulticastGroup("239.255.255.250")
-            })
+        return rxSendMulticast("239.255.255.250", port:1900, message: msg)
     }
     
     static func performZoneQuery() -> Observable<String> {
@@ -71,12 +53,37 @@ class SonosDiscoveryClient {
     }
     
     
-    static private func rxSendMulticast(socket:GCDAsyncUdpSocket, host:String, port:UInt16, message:String) -> Observable<NSData> {
+    static private func rxSendMulticast(host:String, port:UInt16, message:String) -> Observable<String> {
         return Observable.create{ observer -> Disposable in {
             logger.debug("creating observable")
-            
+
             do {
-                socket.rx_data.subscribe(observer)
+                let socket = GCDAsyncUdpSocket(delegate:nil, delegateQueue:dispatch_get_main_queue())
+                func cleanUp() {
+                    do {
+                        logger.debug("leaving multicast group")
+                        try socket?.leaveMulticastGroup("239.255.255.250")
+                    } catch let err as NSError {
+                        logger.error("Error cleaning up: \(err)")
+                    }
+                    socket.close()
+                }
+                socket.rx_data
+                    .map{ data in
+                        return String(data:data, encoding: NSUTF8StringEncoding)!
+                    }
+                    .filter{ s in
+                        return s.containsString("Sonos")
+                    }.take(1)
+                    . doOn(onNext: nil,
+                        onError: { (err) -> Void in
+                            logger.error("Error: \(err)")
+                            cleanUp()
+                        }, onCompleted: { () -> Void in
+                            logger.debug("completed")
+                            cleanUp()
+                    })
+                    .subscribe(observer)
                 try socket.bindToPort(port)
                 try socket.joinMulticastGroup(host)
                 logger.debug("joined multi-cast group")

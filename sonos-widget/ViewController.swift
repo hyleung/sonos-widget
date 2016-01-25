@@ -16,14 +16,34 @@ import AEXML
 class ViewController: UIViewController {
 
     
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
 
     var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.hidden = true
+        activityIndicator.stopAnimating()
+        refreshButton.rx_tap.subscribeNext { () -> Void in
+            self.refresh()
+        }
+        refresh()
         
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    private func refresh() -> Void {
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
         SonosDiscoveryClient
             .performZoneQuery()
             .flatMap( {location -> Observable<NSData> in
@@ -49,19 +69,20 @@ class ViewController: UIViewController {
                 return elements.map({element in element.attributes["ID"]!})
             })
             .observeOn(MainScheduler.instance)
+            .doOn(onNext: nil,
+                onError: { err -> Void in
+                    self.activityIndicator.hidden = true
+                    self.activityIndicator.stopAnimating()
+                },
+                onCompleted: { () -> Void in
+                    self.activityIndicator.hidden = true
+                    self.activityIndicator.stopAnimating()
+                    self.disposeBag = DisposeBag()
+                })
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
-                    logger.info(element)
-                    cell.textLabel?.text = "\(element)"
+                logger.info(element)
+                cell.textLabel?.text = "\(element)"
             }.addDisposableTo(disposeBag)
-        
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
