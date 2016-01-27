@@ -24,7 +24,7 @@ struct ZoneGroup {
                 }
             })
             .flatMap({(xml:AEXMLDocument?) -> [AEXMLElement]? in
-                return xml?["ZoneGroup"].all
+                return xml?["ZoneGroups"]["ZoneGroup"].all
             })
             .flatMap({ (elements:[AEXMLElement]?) -> [ZoneGroup]? in
                 return elements?.flatMap({(e:AEXMLElement) -> ZoneGroup? in
