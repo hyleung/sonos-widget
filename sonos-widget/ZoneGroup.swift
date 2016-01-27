@@ -13,7 +13,7 @@ struct ZoneGroup {
     let groupCoordinator:String
     let id:String
     
-    static func fromXml(xmlString:String) -> ZoneGroup? {
+    static func fromXml(xmlString:String) -> [ZoneGroup]? {
         return xmlString
             .dataUsingEncoding(NSUTF8StringEncoding)
             .map({(data:NSData) -> AEXMLDocument? in
@@ -23,13 +23,18 @@ struct ZoneGroup {
                     return .None
                 }
             })
-            .flatMap({(xml:AEXMLDocument?) -> ZoneGroup? in
-                if  let root = xml?["ZoneGroup"].first,
-                    let id = root.attributes["ID"],
-                    let coordinator = root.attributes["Coordinator"] {
-                    return ZoneGroup(groupCoordinator: coordinator, id: id)
-                }
-                return .None
-            })        
+            .flatMap({(xml:AEXMLDocument?) -> [AEXMLElement]? in
+                return xml?["ZoneGroup"].all
+            })
+            .flatMap({ (elements:[AEXMLElement]?) -> [ZoneGroup]? in
+                return elements?.flatMap({(e:AEXMLElement) -> ZoneGroup? in
+                    if  let id = e.attributes["ID"],
+                        let coordindator = e.attributes["Coordinator"] {
+                        
+                        return ZoneGroup(groupCoordinator: coordindator, id: id)
+                    }
+                    return .None
+                })
+            })
     }
 }

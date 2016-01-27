@@ -42,10 +42,12 @@ class DomainSerializationTests: XCTestCase {
 "    SonarState='4'/></ZoneGroup>"
     
     func testZoneGroupDeserialization() {
-        let zoneGroup = ZoneGroup.fromXml(data)
-        XCTAssertNotNil(zoneGroup)
-        XCTAssertEqual("RINCON_B8E9373F6D2A01400", zoneGroup?.groupCoordinator)
-        XCTAssertEqual("RINCON_B8E9373F6D2A01400:3", zoneGroup?.id)
+        let zoneGroups = ZoneGroup.fromXml(data)
+        XCTAssertNotNil(zoneGroups)
+        XCTAssertEqual(1, zoneGroups?.count)
+        let groupOne = zoneGroups?[0]
+        XCTAssertEqual("RINCON_B8E9373F6D2A01400", groupOne?.groupCoordinator)
+        XCTAssertEqual("RINCON_B8E9373F6D2A01400:3", groupOne?.id)
     }
 }
 
