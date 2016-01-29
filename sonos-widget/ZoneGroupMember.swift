@@ -14,27 +14,22 @@ struct ZoneGroupMember {
     let uuid:String
     let location:String
     
+    static func fromZoneGroup(element:AEXMLElement) -> ZoneGroupMember? {
+        if  let zoneName = element.attributes["ZoneName"],
+            let uuid = element.attributes["UUID"],
+            let location = element.attributes["Location"] {
+                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: location)
+        } else {
+            return .None
+        }
+    }
     static func fromXml(xmlString:String) -> ZoneGroupMember? {
         return xmlString
-            .dataUsingEncoding(NSUTF8StringEncoding)
-            .map({(data:NSData) -> AEXMLDocument? in
-                do {
-                    return try AEXMLDocument(xmlData: data)
-                } catch {
-                    return .None
-                }
-            })
+            .dataUsingEncoding(NSUTF8StringEncoding)?
+            .asXmlDocument()
             .flatMap({(xml:AEXMLDocument?) -> AEXMLElement? in
                 return xml?["ZoneGroupMember"].first
             })
-            .flatMap({(element:AEXMLElement) -> ZoneGroupMember? in
-                if  let zoneName = element.attributes["ZoneName"],
-                    let uuid = element.attributes["UUID"],
-                    let location = element.attributes["Location"] {
-                        return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: location)
-                } else {
-                    return .None
-                }
-            })
+            .flatMap(fromZoneGroup)
     }
 }
