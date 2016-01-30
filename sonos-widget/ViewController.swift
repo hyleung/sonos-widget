@@ -77,7 +77,7 @@ class ViewController: UIViewController {
                 onCompleted: { () -> Void in
                     self.activityIndicator.hidden = true
                     self.activityIndicator.stopAnimating()
-                    self.disposeBag = DisposeBag()
+                    //self.disposeBag = DisposeBag()
                 })
             .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
                 logger.info(element)
@@ -86,6 +86,27 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+class ZoneGroupDataSource:NSObject, UITableViewDataSource {
+    let data:[String]
+    init(_ data:[String]) {
+        self.data = data
+    }
+    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.data.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        //logger.info(data[indexPath.row])
+        cell.textLabel?.text = data[indexPath.row]
+        return cell
+    }
+    
 }
 
 
