@@ -77,13 +77,14 @@ class DomainSerializationTests: XCTestCase {
         let groupOne = zoneGroups?[0]
         XCTAssertEqual("RINCON_B8E9373F6D2A01400", groupOne?.groupCoordinator)
         XCTAssertEqual("RINCON_B8E9373F6D2A01400:3", groupOne?.id)
+        XCTAssertNotNil(groupOne?.members)
     }
     
     func testZoneGroupMemberDeserialization() {
         let zoneGroupMember = ZoneGroupMember.fromXml(zoneGroupMemberData)
         XCTAssertNotNil(zoneGroupMember)
-        
     }
+    
 }
 
 

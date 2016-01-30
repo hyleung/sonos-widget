@@ -14,7 +14,7 @@ struct ZoneGroupMember {
     let uuid:String
     let location:String
     
-    static func fromZoneGroup(element:AEXMLElement) -> ZoneGroupMember? {
+    static func fromZoneGroupMemberElement(element:AEXMLElement) -> ZoneGroupMember? {
         if  let zoneName = element.attributes["ZoneName"],
             let uuid = element.attributes["UUID"],
             let location = element.attributes["Location"] {
@@ -30,6 +30,6 @@ struct ZoneGroupMember {
             .flatMap({(xml:AEXMLDocument?) -> AEXMLElement? in
                 return xml?["ZoneGroupMember"].first
             })
-            .flatMap(fromZoneGroup)
+            .flatMap(fromZoneGroupMemberElement)
     }
 }
