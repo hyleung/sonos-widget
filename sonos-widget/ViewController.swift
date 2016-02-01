@@ -20,15 +20,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
 
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    private let datasource = ZoneGroupDataSource()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.dataSource = self.datasource
+     
         activityIndicator.hidden = true
         activityIndicator.stopAnimating()
         refreshButton.rx_tap.subscribeNext { () -> Void in
             self.refresh()
-        }
+        }.addDisposableTo(disposeBag)
         refresh()
         
     }
@@ -44,69 +48,46 @@ class ViewController: UIViewController {
     private func refresh() -> Void {
         self.activityIndicator.hidden = false
         self.activityIndicator.startAnimating()
-        SonosDiscoveryClient
-            .performZoneQuery()
-            .flatMap( {location -> Observable<NSData> in
-                let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
-                return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
-            })
-            .flatMap({ soapResponse -> Observable<AEXMLDocument> in
-                do {
-                    return Observable.just(try AEXMLDocument(xmlData: soapResponse))
-                } catch let err as NSError {
-                    return Observable.error(err)
-                }
-            })
-            .map({ xml -> String in
-                return xml["s:Envelope"]["s:Body"]["u:GetZoneGroupStateResponse"]["ZoneGroupState"]
-                    .xmlString.unescapeXml()
-            })
-            .map({ zoneGroupState -> [AEXMLElement] in
-                let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
-                return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
-            })
-            .map({ elements -> [String] in
-                return elements.map({element in element.attributes["ID"]!})
-            })
+        self.tableView.reloadData()
+        self.discoveryObservable
             .observeOn(MainScheduler.instance)
-            .doOn(onNext: nil,
-                onError: { err -> Void in
+            .subscribe(onNext: { (data:[String]) -> Void in
+                    self.datasource.data = data
+                }, onError: { (err) -> Void in
+                    logger.error("Error: \(err)")
                     self.activityIndicator.hidden = true
                     self.activityIndicator.stopAnimating()
-                },
-                onCompleted: { () -> Void in
+                }, onCompleted: { () -> Void in
+                    self.tableView.reloadData()
                     self.activityIndicator.hidden = true
                     self.activityIndicator.stopAnimating()
-                    //self.disposeBag = DisposeBag()
-                })
-            .bindTo(tableView.rx_itemsWithCellIdentifier("Cell", cellType: UITableViewCell.self)){ (row, element, cell) in
-                logger.info(element)
-                cell.textLabel?.text = "\(element)"
-            }.addDisposableTo(disposeBag)
+                }, onDisposed: nil )
+            .addDisposableTo(disposeBag)
     }
 
-
-}
-
-class ZoneGroupDataSource:NSObject, UITableViewDataSource {
-    let data:[String]
-    init(_ data:[String]) {
-        self.data = data
-    }
-    @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data.count
-    }
+    private let discoveryObservable = SonosDiscoveryClient
+        .performZoneQuery()
+        .flatMap( {location -> Observable<NSData> in
+            let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+            return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
+        })
+        .flatMap({ soapResponse -> Observable<AEXMLDocument> in
+            do {
+                return Observable.just(try AEXMLDocument(xmlData: soapResponse))
+            } catch let err as NSError {
+                return Observable.error(err)
+            }
+        })
+        .map({ xml -> String in
+            return xml["s:Envelope"]["s:Body"]["u:GetZoneGroupStateResponse"]["ZoneGroupState"]
+                .xmlString.unescapeXml()
+        })
+        .map({ zoneGroupState -> [AEXMLElement] in
+            let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
+            return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
+        })
+        .map({ elements -> [String] in
+            return elements.map({element in element.attributes["ID"]!})
+        })
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        //logger.info(data[indexPath.row])
-        cell.textLabel?.text = data[indexPath.row]
-        return cell
-    }
-    
 }
-
-
