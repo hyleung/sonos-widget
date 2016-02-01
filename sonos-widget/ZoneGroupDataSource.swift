@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import XCGLogger
 class ZoneGroupDataSource:NSObject, UITableViewDataSource {
     var data:[String]?
 
@@ -21,7 +21,7 @@ class ZoneGroupDataSource:NSObject, UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        //logger.info(data[indexPath.row])
+        logger.info(data?[indexPath.row])
         cell.textLabel?.text = data?[indexPath.row]
         return cell
     }
