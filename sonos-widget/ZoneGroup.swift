@@ -41,7 +41,7 @@ struct ZoneGroup {
         })
     }
     
-    private static func groupsFromElementArray(elements:[AEXMLElement]) -> [ZoneGroup]? {
+    static func groupsFromElementArray(elements:[AEXMLElement]) -> [ZoneGroup]? {
         return elements.flatMap(fromZoneGroupElement)
     }
 }

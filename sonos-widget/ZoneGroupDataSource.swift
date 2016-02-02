@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import XCGLogger
 class ZoneGroupDataSource:NSObject, UITableViewDataSource {
-    var data:[String]?
+    var data:[ZoneGroup]?
 
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -21,8 +21,12 @@ class ZoneGroupDataSource:NSObject, UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        logger.info(data?[indexPath.row])
-        cell.textLabel?.text = data?[indexPath.row]
+        if let zoneGroup = data?[indexPath.row] {
+            logger.info(zoneGroup.id)
+            cell.textLabel?.text = "\(zoneGroup.id) (\(zoneGroup.members!.count) members)"
+        } else {
+            cell.textLabel?.text = "ruh-roh"
+        }
         return cell
     }
 

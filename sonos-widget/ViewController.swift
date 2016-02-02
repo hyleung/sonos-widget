@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         self.tableView.reloadData()
         self.discoveryObservable
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { (data:[String]) -> Void in
+            .subscribe(onNext: { (data:[ZoneGroup]?) -> Void in
                     self.datasource.data = data
                 }, onError: { (err) -> Void in
                     logger.error("Error: \(err)")
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                 }, onDisposed: nil )
             .addDisposableTo(disposeBag)
-    }
+    } 
 
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
@@ -86,8 +86,6 @@ class ViewController: UIViewController {
             let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
             return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
         })
-        .map({ elements -> [String] in
-            return elements.map({element in element.attributes["ID"]!})
-        })
+        .map(ZoneGroup.groupsFromElementArray)
     
 }
