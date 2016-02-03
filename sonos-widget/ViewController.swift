@@ -83,6 +83,7 @@ class ViewController: UIViewController {
                 .xmlString.unescapeXml()
         })
         .map({ zoneGroupState -> [AEXMLElement] in
+            logger.info(zoneGroupState)
             let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
             return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
         })

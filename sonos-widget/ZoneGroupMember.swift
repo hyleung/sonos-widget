@@ -13,12 +13,15 @@ struct ZoneGroupMember {
     let zoneName:String
     let uuid:String
     let location:String
+    let sonarState:Int
     
     static func fromZoneGroupMemberElement(element:AEXMLElement) -> ZoneGroupMember? {
         if  let zoneName = element.attributes["ZoneName"],
             let uuid = element.attributes["UUID"],
-            let location = element.attributes["Location"] {
-                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: location)
+            let location = element.attributes["Location"],
+            let stateString = element.attributes["SonarState"],
+            let state = Int(stateString) {
+                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: location, sonarState: state)
         } else {
             return .None
         }

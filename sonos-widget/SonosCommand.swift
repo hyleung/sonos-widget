@@ -27,7 +27,7 @@ struct SonosCommand {
         "s:encodingStyle": "http://schemas.xmlsoap.org/soap/encoding/"]
         let envelope = soapRequest.addChild(name: "s:Envelope", attributes: attributes)
         let body = envelope.addChild(name:"s:Body")
-        body.addChild(name: "u:actionName", attributes: ["xmlns:u": actionHeader()])
+        body.addChild(name: "u:\(action)", attributes: ["xmlns:u": actionHeader()])
         return soapRequest.xmlString
     }
 }
@@ -35,4 +35,6 @@ struct SonosCommand {
 struct SonosService {
     static let ZoneGroupTopologyService = "ZoneGroupTopology"
     static let GetZoneGroupStateAction = "GetZoneGroupState"
+    static let AVTransportService = "AVTransport"
+    static let GetTransportInfoAction = "GetTransportInfo"
 }
