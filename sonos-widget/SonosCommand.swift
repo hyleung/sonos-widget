@@ -27,9 +27,15 @@ struct SonosCommand {
         "s:encodingStyle": "http://schemas.xmlsoap.org/soap/encoding/"]
         let envelope = soapRequest.addChild(name: "s:Envelope", attributes: attributes)
         let body = envelope.addChild(name:"s:Body")
-        body.addChild(name: "u:\(action)", attributes: ["xmlns:u": actionHeader()])
+        let actionElement = body.addChild(name: "u:\(action)", attributes: ["xmlns:u": actionHeader()])
+        
+        arguments?.forEach({ (k,v) -> Void in
+            actionElement.addChild(name: k, value: v, attributes: nil)
+        })
+        
         return soapRequest.xmlString
     }
+
 }
 
 struct SonosService {

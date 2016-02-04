@@ -47,13 +47,12 @@ class SonosCommandTest: XCTestCase {
         let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.GetTransportInfoAction, arguments: ["InstanceId":"1"])
         let xml = s.asXml()?.dataUsingEncoding(NSUTF8StringEncoding)?.asXmlDocument()
         print(xml!.xmlString)
-        let body = xml?["s:Envelope"]["s:Body"]
-        XCTAssertNotNil(body!)
-        let content = body?["u:GetTransportInfo"]
-        XCTAssertNotNil(content!)
-        let params = content?["InstanceId"]
-        print(params!.value!)
-        XCTAssertNotNil(params)
+        let body = xml!["s:Envelope"]["s:Body"]
+        XCTAssertNotNil(body)
+        let content = body["u:GetTransportInfo"]
+        XCTAssertNotNil(content)
+        let params = content["InstanceId"]
+        XCTAssertEqual("1", params.value)
     }
     
     func testPostRequest() {
