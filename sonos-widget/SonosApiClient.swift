@@ -31,4 +31,9 @@ class SonosApiClient {
             return NopDisposable.instance
         })
     }
+    
+    static func getZoneGroupState(location:String) -> Observable<NSData> {
+        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+        return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
+    }
 }

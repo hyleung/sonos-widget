@@ -67,10 +67,7 @@ class ViewController: UIViewController {
 
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
-        .flatMap( {location -> Observable<NSData> in
-            let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
-            return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
-        })
+        .flatMap(SonosApiClient.getZoneGroupState)
         .flatMap({ soapResponse -> Observable<AEXMLDocument> in
             do {
                 return Observable.just(try AEXMLDocument(xmlData: soapResponse))
