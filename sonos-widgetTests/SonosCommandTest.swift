@@ -9,6 +9,7 @@
 import XCTest
 import SwiftClient
 import AEXML
+import RxSwift
 @testable import sonos_widget
 class SonosCommandTest: XCTestCase {
 
@@ -55,10 +56,10 @@ class SonosCommandTest: XCTestCase {
         XCTAssertEqual("1", params.value)
     }
     
-    func testPostRequest() {
+    func testZoneGroupToplogyRequest() {
         let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
 
-        let observable = SonosApiClient.executeAction({ () in return Client()}, baseUrl: "http://192.168.1.74:1400", path: "/ZoneGroupTopology/Control", command: s)
+        let observable = SonosApiClient.executeAction({ () in return Client()}, baseUrl: "http://192.168.1.73:1400", path: "/ZoneGroupTopology/Control", command: s)
         do {
             let result = try observable.toBlocking().first()
             logger.debug(closure: { () in
@@ -68,7 +69,19 @@ class SonosCommandTest: XCTestCase {
         } catch let err as NSError {
             XCTFail("failed: \(err.domain)")
         }
-
     }
-
+    
+    func testGetTransportInfo() {
+        SonosApiClient.getTransportInfo("http://192.168.1.73:1400")
+            .flatMap(SonosApiClient.toXmlDocument)
+            .doOn(onNext: { (doc:AEXMLDocument) -> Void in
+                print(doc.xmlString)
+                },
+                onError: { (err) -> Void in
+                    print(err)
+                },
+                onCompleted:nil )
+            .subscribe()
+    }
+    
 }

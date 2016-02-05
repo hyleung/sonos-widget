@@ -15,10 +15,10 @@ struct SonosCommand {
     let arguments:Dictionary<String,String>?
 
     func serviceNamespace() -> String {
-        return "urn:schemas-upnp-org:service:serviceType:\(serviceType)"
+        return "urn:schemas-upnp-org:service:\(serviceType):\(version)"
     }
     func actionHeader() -> String {
-        return "\(serviceNamespace()):\(version)#\(action)"
+        return "\(serviceNamespace())#\(action)"
     }
     
     func asXml()  -> String? {
@@ -27,7 +27,7 @@ struct SonosCommand {
         "s:encodingStyle": "http://schemas.xmlsoap.org/soap/encoding/"]
         let envelope = soapRequest.addChild(name: "s:Envelope", attributes: attributes)
         let body = envelope.addChild(name:"s:Body")
-        let actionElement = body.addChild(name: "u:\(action)", attributes: ["xmlns:u": actionHeader()])
+        let actionElement = body.addChild(name: "u:\(action)", attributes: ["xmlns:u": serviceNamespace()])
         
         arguments?.forEach({ (k,v) -> Void in
             actionElement.addChild(name: k, value: v, attributes: nil)

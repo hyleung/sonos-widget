@@ -68,13 +68,7 @@ class ViewController: UIViewController {
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
         .flatMap(SonosApiClient.getZoneGroupState)
-        .flatMap({ soapResponse -> Observable<AEXMLDocument> in
-            do {
-                return Observable.just(try AEXMLDocument(xmlData: soapResponse))
-            } catch let err as NSError {
-                return Observable.error(err)
-            }
-        })
+        .flatMap(SonosApiClient.toXmlDocument)
         .map({ xml -> String in
             return xml["s:Envelope"]["s:Body"]["u:GetZoneGroupStateResponse"]["ZoneGroupState"]
                 .xmlString.unescapeXml()
