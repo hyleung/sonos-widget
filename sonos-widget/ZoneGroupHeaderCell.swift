@@ -7,3 +7,9 @@
 //
 
 import Foundation
+import UIKit
+import XCGLogger
+
+class ZoneGroupHeaderCell: UITableViewCell {
+    @IBOutlet weak var headerLabel: UILabel!
+}

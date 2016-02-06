@@ -20,7 +20,7 @@ class ZoneGroupDataSource:NSObject, UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("GroupMemberCell", forIndexPath: indexPath)
         if let zoneGroupMember = data?[indexPath.section].members?[indexPath.row] {
             //logger.info(zoneGroup.id)
             cell.textLabel?.text = "\(zoneGroupMember.zoneName.unescapeXml())"

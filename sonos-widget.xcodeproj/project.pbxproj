@@ -21,6 +21,7 @@
 		F06FB95A1C5719DC00473B32 /* ZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06FB9591C5719DC00473B32 /* ZoneGroup.swift */; };
 		F06FB95C1C571ED600473B32 /* DomainDeserializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06FB95B1C571ED600473B32 /* DomainDeserializationTests.swift */; };
 		F06FB95E1C58879800473B32 /* ZoneGroupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06FB95D1C58879800473B32 /* ZoneGroupMember.swift */; };
+		F0A240A71C65C00100E364B8 /* ZoneGroupHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A240A61C65C00100E364B8 /* ZoneGroupHeaderCell.swift */; };
 		F0CFA5A51C5DB212008491FE /* ZoneGroupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CFA5A41C5DB212008491FE /* ZoneGroupDataSource.swift */; };
 		F0D0BB241C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0BB231C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift */; };
 		F0D0BB261C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0BB251C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift */; };
@@ -59,6 +60,7 @@
 		F06FB9591C5719DC00473B32 /* ZoneGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneGroup.swift; sourceTree = "<group>"; };
 		F06FB95B1C571ED600473B32 /* DomainDeserializationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainDeserializationTests.swift; sourceTree = "<group>"; };
 		F06FB95D1C58879800473B32 /* ZoneGroupMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneGroupMember.swift; sourceTree = "<group>"; };
+		F0A240A61C65C00100E364B8 /* ZoneGroupHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneGroupHeaderCell.swift; sourceTree = "<group>"; };
 		F0CFA5A41C5DB212008491FE /* ZoneGroupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneGroupDataSource.swift; sourceTree = "<group>"; };
 		F0D0BB231C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxGCDAsyncUdpSocketDelegateProxy.swift; sourceTree = "<group>"; };
 		F0D0BB251C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GCDAsyncUdpSocket+Rx.swift"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				F038F24C1C4AB94E0083053E /* SonosCommand.swift */,
 				F06FB9521C4EAA5A00473B32 /* SonosApiClient.swift */,
 				F0CFA5A41C5DB212008491FE /* ZoneGroupDataSource.swift */,
+				F0A240A61C65C00100E364B8 /* ZoneGroupHeaderCell.swift */,
 			);
 			path = "sonos-widget";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				F0D5DB4A1C59C5F200BDAE35 /* NSData+Ext.swift in Sources */,
 				F02C42D21C2FB09D00E4F20C /* ViewController.swift in Sources */,
 				F0CFA5A51C5DB212008491FE /* ZoneGroupDataSource.swift in Sources */,
+				F0A240A71C65C00100E364B8 /* ZoneGroupHeaderCell.swift in Sources */,
 				F06FB9531C4EAA5A00473B32 /* SonosApiClient.swift in Sources */,
 				F0D0BB261C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift in Sources */,
 				F02C42D01C2FB09D00E4F20C /* AppDelegate.swift in Sources */,

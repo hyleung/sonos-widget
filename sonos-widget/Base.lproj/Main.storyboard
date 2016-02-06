@@ -22,13 +22,48 @@
                                 <rect key="frame" x="20" y="58" width="374" height="658"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="pZK-a8-63q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupMemberCell" id="pZK-a8-63q">
                                         <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pZK-a8-63q" id="q1f-AQ-Dcc">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ZoneGroupCell" rowHeight="50" id="eC9-lE-Cu3" customClass="ZoneGroupHeaderCell" customModule="sonos_widget" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="374" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eC9-lE-Cu3" id="4cT-th-d91">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Some Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssr-fH-XUT">
+                                                    <rect key="frame" x="18" y="13" width="90" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEn-1O-ftW">
+                                                    <rect key="frame" x="314" y="-2" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="THA-Db-drW"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Play"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pEn-1O-ftW" secondAttribute="trailing" constant="15" id="3fg-Ga-rHz"/>
+                                                <constraint firstItem="Ssr-fH-XUT" firstAttribute="centerY" secondItem="pEn-1O-ftW" secondAttribute="centerY" id="5bW-Rd-flU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pEn-1O-ftW" secondAttribute="bottom" constant="5.5" id="QP2-cH-YZa"/>
+                                                <constraint firstItem="pEn-1O-ftW" firstAttribute="top" secondItem="4cT-th-d91" secondAttribute="topMargin" constant="3" id="XWi-PU-ffy"/>
+                                                <constraint firstItem="Ssr-fH-XUT" firstAttribute="leading" secondItem="4cT-th-d91" secondAttribute="leadingMargin" constant="10" id="mHJ-XV-uaL"/>
+                                                <constraint firstItem="Ssr-fH-XUT" firstAttribute="top" secondItem="4cT-th-d91" secondAttribute="topMargin" constant="5" id="ut1-xR-rnQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="headerLabel" destination="Ssr-fH-XUT" id="g3K-nf-N4P"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -64,4 +99,7 @@
             <point key="canvasLocation" x="445" y="447"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Play" width="50" height="50"/>
+    </resources>
 </document>
