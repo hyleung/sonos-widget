@@ -34,9 +34,8 @@ class ViewController: UIViewController {
             self.refresh()
         }.addDisposableTo(disposeBag)
         refresh()
-        
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         
     }
@@ -44,7 +43,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     private func refresh() -> Void {
         self.activityIndicator.hidden = false
         self.activityIndicator.startAnimating()
@@ -79,5 +78,5 @@ class ViewController: UIViewController {
             return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
         })
         .map(ZoneGroup.groupsFromElementArray)
-    
+
 }

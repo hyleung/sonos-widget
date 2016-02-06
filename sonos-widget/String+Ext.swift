@@ -15,5 +15,6 @@ extension String {
             .stringByReplacingOccurrencesOfString("&quot;", withString: "'")
             .stringByReplacingOccurrencesOfString("\t", withString: "")
             .stringByReplacingOccurrencesOfString("\r", withString: "")
+            .stringByReplacingOccurrencesOfString("&apos;", withString: "'")
     }
 }
