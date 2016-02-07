@@ -76,17 +76,6 @@ class ViewController: UIViewController, UITableViewDelegate {
 
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
-        .flatMap(SonosApiClient.getZoneGroupState)
-        .flatMap(SonosApiClient.toXmlDocument)
-        .map({ xml -> String in
-            return xml["s:Envelope"]["s:Body"]["u:GetZoneGroupStateResponse"]["ZoneGroupState"]
-                .xmlString.unescapeXml()
-        })
-        .map({ zoneGroupState -> [AEXMLElement] in
-            logger.info(zoneGroupState)
-            let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
-            return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
-        })
-        .map(ZoneGroup.groupsFromElementArray)
+        .flatMap(SonosApiClient.rx_getZoneGroupState)
 
 }
