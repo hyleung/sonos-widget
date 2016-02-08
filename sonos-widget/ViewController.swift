@@ -46,7 +46,15 @@ class ViewController: UIViewController, UITableViewDelegate {
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerCell = self.tableView?.dequeueReusableCellWithIdentifier("ZoneGroupCell") as! ZoneGroupHeaderCell
-        headerCell.headerLabel.text = datasource.data?[section].id
+        if let zoneGroup = datasource.data?[section] {
+            headerCell.headerLabel.text = zoneGroup.id
+            if let coordinator = zoneGroup.members?.filter({ member in
+                return member.uuid == zoneGroup.groupCoordinator
+            }).first {
+                logger.info("Group coordinator: \(coordinator.location.host):\(coordinator.location.port)")
+            }
+        }
+
         return headerCell
     }
     

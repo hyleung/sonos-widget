@@ -12,13 +12,14 @@ import AEXML
 struct ZoneGroupMember {
     let zoneName:String
     let uuid:String
-    let location:String
+    let location:NSURL
     
     static func fromZoneGroupMemberElement(element:AEXMLElement) -> ZoneGroupMember? {
         if  let zoneName = element.attributes["ZoneName"],
             let uuid = element.attributes["UUID"],
-            let location = element.attributes["Location"] {
-                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: location)
+            let location = element.attributes["Location"],
+            let locationUrl = NSURL(string:location) {
+                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: locationUrl)
         } else {
             return .None
         }

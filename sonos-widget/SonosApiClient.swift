@@ -61,6 +61,14 @@ class SonosApiClient {
         return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
 
+    static func rx_getTransportInfo(location:String) -> Observable<AEXMLElement> {
+        return getTransportInfo(location)
+            .flatMap(toXmlDocument)
+            .map({ xml -> AEXMLElement in
+                    return xml["ns0:Envelope"]["ns0:Body"]["ns1:GetTransportInfoResponse"]
+            })
+    }
+
     static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
             return Observable.just(try AEXMLDocument(xmlData: data))
