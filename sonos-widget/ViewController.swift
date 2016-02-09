@@ -47,14 +47,24 @@ class ViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerCell = self.tableView?.dequeueReusableCellWithIdentifier("ZoneGroupCell") as! ZoneGroupHeaderCell
         if let zoneGroup = datasource.data?[section] {
-            headerCell.headerLabel.text = zoneGroup.id
             if let coordinator = zoneGroup.members?.filter({ member in
                 return member.uuid == zoneGroup.groupCoordinator
             }).first {
-                logger.info("Group coordinator: \(coordinator.location.host):\(coordinator.location.port)")
+                let locationUrl = "http://\(coordinator.location.host!):\(coordinator.location.port!)"
+                logger.info("Group coordinator: \(locationUrl)")
+                SonosApiClient.rx_getTransportInfo(locationUrl)
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { (element) -> Void in
+                            logger.info(element.xmlString)
+                            if let state = element["CurrentTransportState"].value {
+                                logger.info("Group state: \(state)")
+                                headerCell.headerLabel.text = "\(state)"
+                            }
+                        }, onError: { err -> Void in
+                            logger.error("Error: \(err)")
+                        }, onCompleted: nil, onDisposed: nil)
             }
         }
-
         return headerCell
     }
     

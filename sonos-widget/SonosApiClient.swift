@@ -65,12 +65,13 @@ class SonosApiClient {
         return getTransportInfo(location)
             .flatMap(toXmlDocument)
             .map({ xml -> AEXMLElement in
-                    return xml["ns0:Envelope"]["ns0:Body"]["ns1:GetTransportInfoResponse"]
+                    return xml["s:Envelope"]["s:Body"]["u:GetTransportInfoResponse"]
             })
     }
 
     static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
+            logger.debug(data.asXmlDocument()?.xmlString)
             return Observable.just(try AEXMLDocument(xmlData: data))
         } catch let err as NSError {
             return Observable.error(err)
