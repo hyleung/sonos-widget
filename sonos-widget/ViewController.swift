@@ -58,7 +58,8 @@ class ViewController: UIViewController, UITableViewDelegate {
                             logger.info(element.xmlString)
                             if let state = element["CurrentTransportState"].value {
                                 logger.info("Group state: \(state)")
-                                headerCell.headerLabel.text = "\(state)"
+                                headerCell.headerLabel.text = "\(coordinator.uuid)"
+                                ViewController.updateHeaderCell(headerCell, groupState: state)
                             }
                         }, onError: { err -> Void in
                             logger.error("Error: \(err)")
@@ -70,6 +71,17 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50.0
+    }
+    
+    static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String) -> Void {
+        if ("PAUSED_PLAYBACK" == groupState || "STOPPED" == groupState) {
+            cell.zoneGroupStateButon.setImage(UIImage(named:"Play"), forState: UIControlState.Normal)
+            cell.zoneGroupStateButon.rx_tap.subscribeNext({ () -> Void in
+                logger.debug("tapped")
+            })
+        } else {
+            cell.zoneGroupStateButon.setImage(UIImage(named:"Pause"), forState: UIControlState.Normal)
+        }
     }
     
     private func refresh() -> Void {
