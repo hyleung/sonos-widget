@@ -69,6 +69,16 @@ class SonosApiClient {
             })
     }
 
+    static func play(location:String) -> Observable<NSData> {
+        let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.PlayAction, arguments: ["InstanceID":"0", "Speed":"1"])
+        return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
+    }
+
+    static func pause(location:String) -> Observable<NSData> {
+        let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.PauseAction, arguments: ["InstanceID":"0", "Speed":"1"])
+        return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
+    }
+
     static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
             logger.debug(data.asXmlDocument()?.xmlString)

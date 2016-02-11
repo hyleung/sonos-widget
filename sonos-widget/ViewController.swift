@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate {
                             if let state = element["CurrentTransportState"].value {
                                 logger.info("Group state: \(state)")
                                 headerCell.headerLabel.text = "\(coordinator.uuid)"
-                                ViewController.updateHeaderCell(headerCell, groupState: state)
+                                ViewController.updateHeaderCell(headerCell, groupState: state, location: locationUrl)
                             }
                         }, onError: { err -> Void in
                             logger.error("Error: \(err)")
@@ -73,14 +73,29 @@ class ViewController: UIViewController, UITableViewDelegate {
         return 50.0
     }
     
-    static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String) -> Void {
+    static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String, location:String) -> Void {
         if ("PAUSED_PLAYBACK" == groupState || "STOPPED" == groupState) {
             cell.zoneGroupStateButon.setImage(UIImage(named:"Play"), forState: UIControlState.Normal)
             cell.zoneGroupStateButon.rx_tap.subscribeNext({ () -> Void in
-                logger.debug("tapped")
+                logger.debug("tapped: \(groupState)")
+                SonosApiClient.play(location)
+                    .observeOn(MainScheduler.instance)
+                    .subscribeNext({ (data) -> Void in
+                        logger.debug("completed play action")
+                })
             })
         } else {
             cell.zoneGroupStateButon.setImage(UIImage(named:"Pause"), forState: UIControlState.Normal)
+            cell.zoneGroupStateButon.rx_tap.subscribeNext({ () -> Void in
+                logger.debug("tapped: \(groupState)")
+                SonosApiClient.pause(location)
+                    .observeOn(MainScheduler.instance)
+                    .subscribeNext({ (data) -> Void in
+                        logger.debug("completed pause action")
+                })
+
+            })
+
         }
     }
     

@@ -43,4 +43,6 @@ struct SonosService {
     static let GetZoneGroupStateAction = "GetZoneGroupState"
     static let AVTransportService = "AVTransport"
     static let GetTransportInfoAction = "GetTransportInfo"
+    static let PlayAction = "Play"
+    static let PauseAction = "Pause"
 }
