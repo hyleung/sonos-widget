@@ -74,28 +74,9 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
     
     static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String, location:String) -> Void {
-        if ("PAUSED_PLAYBACK" == groupState || "STOPPED" == groupState) {
-            cell.zoneGroupStateButon.setImage(UIImage(named:"Play"), forState: UIControlState.Normal)
-            cell.zoneGroupStateButon.rx_tap.subscribeNext({ () -> Void in
-                logger.debug("tapped: \(groupState)")
-                SonosApiClient.play(location)
-                    .observeOn(MainScheduler.instance)
-                    .subscribeNext({ (data) -> Void in
-                        logger.debug("completed play action")
-                })
-            })
-        } else {
-            cell.zoneGroupStateButon.setImage(UIImage(named:"Pause"), forState: UIControlState.Normal)
-            cell.zoneGroupStateButon.rx_tap.subscribeNext({ () -> Void in
-                logger.debug("tapped: \(groupState)")
-                SonosApiClient.pause(location)
-                    .observeOn(MainScheduler.instance)
-                    .subscribeNext({ (data) -> Void in
-                        logger.debug("completed pause action")
-                })
-
-            })
-
+        cell.initializeState(groupState)
+        cell.zoneGroupStateButon.rx_tap.subscribeNext { () -> Void in
+            logger.debug("tapped")
         }
     }
     
