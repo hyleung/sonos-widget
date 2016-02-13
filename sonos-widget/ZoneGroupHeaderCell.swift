@@ -15,22 +15,26 @@ import XCGLogger
 
 class ZoneGroupHeaderCell: UITableViewCell, ZoneGroupHeaderView {
     private var state:ZoneGroupHeaderState?
+    private var disposeBag = DisposeBag()
     
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var zoneGroupStateButon: UIButton!
     override func willMoveToSuperview(newSuperview: UIView?) {
         zoneGroupStateButon.rx_tap.subscribeNext { () -> Void in
             self.state?.advance(self)
-        }
+        }.addDisposableTo(disposeBag)
     }
     
-    func initializeState(groupState:String) -> Void {
+    override func willRemoveSubview(subview: UIView) {
+        self.disposeBag = DisposeBag()
+    }
+    func initialize(groupState:String, location:String) -> Void {
         if ("PAUSED_PLAYBACK" == groupState) {
-            self.state = Paused(self)
+            self.state = Paused(self, location:location)
         } else if ("STOPPED" == groupState) {
-            self.state = Stopped(self)
+            self.state = Stopped(self, location:location)
         } else {
-            self.state = Playing(self)
+            self.state = Playing(self, location:location)
         }
     }
     
@@ -41,4 +45,9 @@ class ZoneGroupHeaderCell: UITableViewCell, ZoneGroupHeaderView {
     func setButtonImage(img:UIImage?,forState:UIControlState) -> Void {
         self.zoneGroupStateButon.setImage(img, forState: forState)
     }
+    
+    func getDisposeBag() -> DisposeBag {
+        return self.disposeBag
+    }
+
 }

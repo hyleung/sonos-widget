@@ -74,10 +74,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
     
     static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String, location:String) -> Void {
-        cell.initializeState(groupState)
-        cell.zoneGroupStateButon.rx_tap.subscribeNext { () -> Void in
-            logger.debug("tapped")
-        }
+        cell.initialize(groupState, location:location)
     }
     
     private func refresh() -> Void {

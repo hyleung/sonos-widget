@@ -82,6 +82,7 @@ class SonosCommandTest: XCTestCase {
                 },
                 onCompleted:nil )
             .subscribe()
+            .dispose()
     }
     
 }

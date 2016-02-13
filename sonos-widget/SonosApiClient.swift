@@ -28,6 +28,7 @@ class SonosApiClient {
                     }
                     subscriber.onCompleted()
                 }, onError: { err in
+                    logger.error("error occurred: \(err)")
                     subscriber.onError(err)
                 })
             return NopDisposable.instance
