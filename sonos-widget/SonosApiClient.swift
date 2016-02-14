@@ -80,6 +80,11 @@ class SonosApiClient {
         return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
 
+    
+    static func getPositionInfo(location:String) -> Observable<NSData> {
+        let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.GetPositionInfoAction, arguments: ["InstanceID":"0"])
+        return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
+    }
     static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
             logger.debug(data.asXmlDocument()?.xmlString)

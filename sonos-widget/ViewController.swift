@@ -64,6 +64,19 @@ class ViewController: UIViewController, UITableViewDelegate {
                         }, onError: { err -> Void in
                             logger.error("Error: \(err)")
                         }, onCompleted: nil, onDisposed: nil)
+                //hack
+                SonosApiClient.getPositionInfo(locationUrl)
+                    .map({(data:NSData) -> AEXMLDocument in
+                        return data.asXmlDocument()!
+                    })
+                    .map({ (document:AEXMLDocument) -> AEXMLDocument in
+                        let trackMetaData:String = (document["s:Envelope"]["s:Body"]["u:GetPositionInfoResponse"]["TrackMetaData"].value?.unescapeXml())!
+                        return try AEXMLDocument(xmlData: trackMetaData.dataUsingEncoding(NSUTF8StringEncoding)!)
+                    })
+                    .subscribeNext({ (doc:AEXMLDocument) -> Void in
+                        logger.debug(doc.xmlString)
+                    })
+                
             }
         }
         return headerCell

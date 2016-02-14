@@ -56,33 +56,48 @@ class SonosCommandTest: XCTestCase {
         XCTAssertEqual("1", params.value)
     }
     
-    func testZoneGroupToplogyRequest() {
-        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
-
-        let observable = SonosApiClient.executeAction({ () in return Client()}, baseUrl: "http://192.168.1.73:1400", path: "/ZoneGroupTopology/Control", command: s)
-        do {
-            let result = try observable.toBlocking().first()
-            logger.debug(closure: { () in
-                return (NSString(data:result!, encoding:NSUTF8StringEncoding)! as String)
-            })
-            XCTAssertNotNil(result)
-        } catch let err as NSError {
-            XCTFail("failed: \(err.domain)")
-        }
-    }
+//    func testZoneGroupToplogyRequest() {
+//        let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
+//
+//        let observable = SonosApiClient.executeAction({ () in return Client()}, baseUrl: "http://192.168.1.73:1400", path: "/ZoneGroupTopology/Control", command: s)
+//        do {
+//            let result = try observable.toBlocking().first()
+//            logger.debug(closure: { () in
+//                return (NSString(data:result!, encoding:NSUTF8StringEncoding)! as String)
+//            })
+//            XCTAssertNotNil(result)
+//        } catch let err as NSError {
+//            XCTFail("failed: \(err.domain)")
+//        }
+//    }
     
-    func testGetTransportInfo() {
-        SonosApiClient.getTransportInfo("http://192.168.1.73:1400")
+//    func testGetTransportInfo() {
+//        SonosApiClient.getTransportInfo("http://192.168.1.65:1400")
+//            .flatMap(SonosApiClient.toXmlDocument)
+//            .doOn(onNext: { (doc:AEXMLDocument) -> Void in
+//                print(doc.xmlString)
+//                },
+//                onError: { (err) -> Void in
+//                    print(err)
+//                },
+//                onCompleted:nil )
+//            .subscribe()
+//            .dispose()
+//    }
+    
+    func testGetPositionfo() {
+        SonosApiClient.getPositionInfo("http://192.168.1.74:1400")
             .flatMap(SonosApiClient.toXmlDocument)
             .doOn(onNext: { (doc:AEXMLDocument) -> Void in
-                print(doc.xmlString)
+                let e = doc["u:GetPositionInfoResponse"]["TrackMetaData"]
+                let trackData = e.xmlString.unescapeXml()
+                print(trackData)
                 },
                 onError: { (err) -> Void in
                     print(err)
                 },
                 onCompleted:nil )
             .subscribe()
-            .dispose()
     }
     
 }
