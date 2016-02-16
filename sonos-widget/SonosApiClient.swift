@@ -85,6 +85,25 @@ class SonosApiClient {
         let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.GetPositionInfoAction, arguments: ["InstanceID":"0"])
         return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
+    
+    static func getCurrentTrackMetaData(location:String) -> Observable<AEXMLDocument> {
+        return getPositionInfo(location)
+            .flatMap(toXmlDocument)
+            .flatMap({ (document) -> Observable<AEXMLDocument> in
+                if let trackMetaData = document["s:Envelope"]["s:Body"]["u:GetPositionInfoResponse"]["TrackMetaData"].value?.unescapeXml(),
+                    let trackNSData = trackMetaData.dataUsingEncoding(NSUTF8StringEncoding) {
+                    do {
+                        let result = try AEXMLDocument(xmlData:trackNSData)
+                        return Observable.just(result)
+                    }
+                    catch let err as NSError {
+                        return Observable.error(err)
+                    }
+                }
+                return Observable.empty()
+            })
+    }
+    
     static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
             logger.debug(data.asXmlDocument()?.xmlString)
