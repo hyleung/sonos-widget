@@ -48,7 +48,7 @@ class SonosApiClient {
                 .xmlString.unescapeXml()
             })
             .map({ zoneGroupState -> [AEXMLElement] in
-                logger.info(zoneGroupState)
+                //logger.info(zoneGroupState)
                 let xml = try AEXMLDocument(xmlData: zoneGroupState.dataUsingEncoding(NSUTF8StringEncoding)!)
                 return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
             })
@@ -94,19 +94,21 @@ class SonosApiClient {
                     let trackNSData = trackMetaData.dataUsingEncoding(NSUTF8StringEncoding) {
                     do {
                         let result = try AEXMLDocument(xmlData:trackNSData)
+                        logger.debug(result.xmlString)
                         return Observable.just(result)
                     }
                     catch let err as NSError {
                         return Observable.error(err)
                     }
                 }
-                return Observable.empty()
+                //empty document
+                return Observable.just(AEXMLDocument())
             })
     }
     
     static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
-            logger.debug(data.asXmlDocument()?.xmlString)
+            // logger.debug(data.asXmlDocument()?.xmlString)
             return Observable.just(try AEXMLDocument(xmlData: data))
         } catch let err as NSError {
             return Observable.error(err)

@@ -52,37 +52,60 @@ class ViewController: UIViewController, UITableViewDelegate {
             }).first {
                 let locationUrl = "http://\(coordinator.location.host!):\(coordinator.location.port!)"
                 logger.info("Group coordinator: \(locationUrl)")
-                SonosApiClient.rx_getTransportInfo(locationUrl)
+                let rxTransportState = SonosApiClient
+                    .rx_getTransportInfo(locationUrl)
+                    .flatMap({(element:AEXMLElement) -> Observable<String> in
+                        if let state = element["CurrentTransportState"].value {
+                            return Observable.just(state)
+                        } else {
+                            return Observable.empty()
+                        }
+                    })
+
+                let rxCurrentTrack = SonosApiClient
+                    .getCurrentTrackMetaData(locationUrl)
+                    .flatMap({(doc:AEXMLDocument) -> Observable<String> in
+                        if let title = doc["DIDL-Lite"]["item"]["dc:title"].value,
+                            let creator = doc["DIDL-Lite"]["item"]["dc:creator"].value {
+                                if (title.containsString("not found") && creator.containsString("not found")) {
+                                    return Observable.just("No track")
+                                }
+                                return Observable.just("\(title) - \(creator)")
+                        }
+                        return Observable.empty()
+                    })
+
+                let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:String, text:String) -> (String, String) in
+                    return (state, text)
+                })
+
+                zipped
                     .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { (element) -> Void in
-                            logger.info(element.xmlString)
-                            if let state = element["CurrentTransportState"].value {
-                                logger.info("Group state: \(state)")
-                                headerCell.headerLabel.text = "\(coordinator.uuid)"
-                                ViewController.updateHeaderCell(headerCell, groupState: state, location: locationUrl)
-                            }
+                    .subscribe(onNext: { (element:(String, String)) -> Void in
+                            let state = element.0
+                            let title = element.1
+                            logger.info("Group state: \(state)")
+                            headerCell.headerLabel.text = title
+                            ViewController.updateHeaderCell(headerCell, groupState: state, location: locationUrl)
+                        
                         }, onError: { err -> Void in
                             logger.error("Error: \(err)")
                         }, onCompleted: nil, onDisposed: nil)
-                //hack
-                SonosApiClient.getCurrentTrackMetaData(locationUrl)
-                    .subscribeNext({ (doc:AEXMLDocument) -> Void in
-                        logger.debug(doc.xmlString)
-                    })
+
 
             }
         }
         return headerCell
     }
-    
+
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50.0
     }
-    
+
     static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String, location:String) -> Void {
         cell.initialize(groupState, location:location)
     }
-    
+
     private func refresh() -> Void {
         self.activityIndicator.hidden = false
         self.activityIndicator.startAnimating()
