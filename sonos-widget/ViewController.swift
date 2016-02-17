@@ -22,7 +22,6 @@ class ViewController: UIViewController, UITableViewDelegate {
 
     private var disposeBag = DisposeBag()
     private let datasource = ZoneGroupDataSource()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate {
                         } else {
                             return Observable.empty()
                         }
-                    })
+                    }).subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
                 let rxCurrentTrack = SonosApiClient
                     .getCurrentTrackMetaData(locationUrl)
@@ -73,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate {
                                 return Observable.just("\(title) - \(creator)")
                         }
                         return Observable.empty()
-                    })
+                    }).subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
                 let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:String, text:String) -> (String, String) in
                     return (state, text)
