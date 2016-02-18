@@ -17,6 +17,7 @@ class ZoneGroupHeaderCell: UITableViewCell, ZoneGroupHeaderView {
     private var state:ZoneGroupHeaderState?
     private var disposeBag = DisposeBag()
     
+    @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var zoneGroupStateButon: UIButton!
     override func willMoveToSuperview(newSuperview: UIView?) {

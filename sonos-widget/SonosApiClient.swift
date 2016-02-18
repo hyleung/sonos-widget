@@ -53,7 +53,9 @@ class SonosApiClient {
                 return xml["ZoneGroupState"]["ZoneGroups"]["ZoneGroup"].all!
             })
             .map({(elems:[AEXMLElement]) in
-                return ZoneGroup.groupsFromElementArray(elems)!
+                return ZoneGroup.groupsFromElementArray(elems)!.sort({ (g1, g2) -> Bool in
+                    g1.members?.count > g2.members?.count
+                })
             })
     }
 

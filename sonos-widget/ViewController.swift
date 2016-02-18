@@ -63,28 +63,30 @@ class ViewController: UIViewController, UITableViewDelegate {
 
                 let rxCurrentTrack = SonosApiClient
                     .getCurrentTrackMetaData(locationUrl)
-                    .flatMap({(doc:AEXMLDocument) -> Observable<String> in
+                    .flatMap({(doc:AEXMLDocument) -> Observable<(String, String)> in
                         if let title = doc["DIDL-Lite"]["item"]["dc:title"].value,
                             let creator = doc["DIDL-Lite"]["item"]["dc:creator"].value {
                                 if (title.containsString("not found") && creator.containsString("not found")) {
-                                    return Observable.just("No track")
+                                    return Observable.just(("No track",""))
                                 }
-                                return Observable.just("\(title) - \(creator)")
+                                return Observable.just((title, creator))
                         }
                         return Observable.empty()
                     }).subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
-                let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:String, text:String) -> (String, String) in
-                    return (state, text)
+                let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:String, trackInfo:(String, String)) -> (String, (String, String)) in
+                    return (state, trackInfo)
                 })
 
                 zipped
                     .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { (element:(String, String)) -> Void in
+                    .subscribe(onNext: { (element:(String, (String, String))) -> Void in
                             let state = element.0
-                            let title = element.1
+                            let title = element.1.0
+                            let artist = element.1.1
                             logger.info("Group state: \(state)")
                             headerCell.headerLabel.text = title
+                            headerCell.artistLabel.text = artist
                             ViewController.updateHeaderCell(headerCell, groupState: state, location: locationUrl)
                         
                         }, onError: { err -> Void in
