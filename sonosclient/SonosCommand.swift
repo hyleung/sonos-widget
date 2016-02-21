@@ -8,20 +8,26 @@
 
 import Foundation
 import AEXML
-struct SonosCommand {
+public struct SonosCommand {
     let serviceType:String
     let version:Int
     let action:String
     let arguments:Dictionary<String,String>?
 
-    func serviceNamespace() -> String {
+    public init(serviceType:String, version:Int, action:String, arguments:Dictionary<String, String>?) {
+        self.serviceType = serviceType
+        self.version = version
+        self.action = action
+        self.arguments = arguments
+    }
+    public func serviceNamespace() -> String {
         return "urn:schemas-upnp-org:service:\(serviceType):\(version)"
     }
-    func actionHeader() -> String {
+    public func actionHeader() -> String {
         return "\(serviceNamespace())#\(action)"
     }
     
-    func asXml()  -> String? {
+    public func asXml()  -> String? {
         let soapRequest = AEXMLDocument()
         let attributes = ["xmlns:s":"http://schemas.xmlsoap.org/soap/envelope/",
         "s:encodingStyle": "http://schemas.xmlsoap.org/soap/encoding/"]
@@ -38,12 +44,12 @@ struct SonosCommand {
 
 }
 
-struct SonosService {
-    static let ZoneGroupTopologyService = "ZoneGroupTopology"
-    static let GetZoneGroupStateAction = "GetZoneGroupState"
-    static let AVTransportService = "AVTransport"
-    static let GetTransportInfoAction = "GetTransportInfo"
-    static let PlayAction = "Play"
-    static let PauseAction = "Pause"
-    static let GetPositionInfoAction = "GetPositionInfo"
+public struct SonosService {
+    public static let ZoneGroupTopologyService = "ZoneGroupTopology"
+    public static let GetZoneGroupStateAction = "GetZoneGroupState"
+    public static let AVTransportService = "AVTransport"
+    public static let GetTransportInfoAction = "GetTransportInfo"
+    public static let PlayAction = "Play"
+    public static let PauseAction = "Pause"
+    public static let GetPositionInfoAction = "GetPositionInfo"
 }

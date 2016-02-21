@@ -10,8 +10,7 @@ import XCTest
 import RxSwift
 import RxBlocking
 @testable import sonos_widget
-
-
+import sonosclient
 class SonosDiscoveryTest: XCTestCase {
 
     let data:String = " HTTP/1.1 200 OK\r\n" +

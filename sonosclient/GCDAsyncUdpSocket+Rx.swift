@@ -9,7 +9,6 @@
 import CocoaAsyncSocket
 import RxSwift
 import RxCocoa
-
 extension GCDAsyncUdpSocket {
     public var rx_delegate:DelegateProxy {
         return proxyForObject(RxGCDAsyncUdpSocketDelegateProxy.self,self)

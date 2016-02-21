@@ -10,7 +10,7 @@ import Foundation
 import SwiftClient
 import RxSwift
 import AEXML
-class SonosApiClient {
+public class SonosApiClient {
     static func executeAction(client:() -> Client, baseUrl:String, path:String, command: SonosCommand) -> Observable<NSData> {
 
         return Observable.create({ subscriber in
@@ -35,12 +35,12 @@ class SonosApiClient {
         })
     }
     
-    static func getZoneGroupState(location:String) -> Observable<NSData> {
+    public static func getZoneGroupState(location:String) -> Observable<NSData> {
         let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
         return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
     }
 
-    static func rx_getZoneGroupState(location:String) -> Observable<[ZoneGroup]> {
+    public static func rx_getZoneGroupState(location:String) -> Observable<[ZoneGroup]> {
         return getZoneGroupState(location)
             .flatMap(toXmlDocument)
             .map({ xml -> String in
@@ -59,12 +59,12 @@ class SonosApiClient {
             })
     }
 
-    static func getTransportInfo(location:String) -> Observable<NSData> {
+    public static func getTransportInfo(location:String) -> Observable<NSData> {
         let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.GetTransportInfoAction, arguments: ["InstanceID":"0"])
         return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
 
-    static func rx_getTransportInfo(location:String) -> Observable<AEXMLElement> {
+    public static func rx_getTransportInfo(location:String) -> Observable<AEXMLElement> {
         return getTransportInfo(location)
             .flatMap(toXmlDocument)
             .map({ xml -> AEXMLElement in
@@ -72,23 +72,23 @@ class SonosApiClient {
             })
     }
 
-    static func play(location:String) -> Observable<NSData> {
+    public static func play(location:String) -> Observable<NSData> {
         let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.PlayAction, arguments: ["InstanceID":"0", "Speed":"1"])
         return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
 
-    static func pause(location:String) -> Observable<NSData> {
+    public static func pause(location:String) -> Observable<NSData> {
         let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.PauseAction, arguments: ["InstanceID":"0", "Speed":"1"])
         return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
 
     
-    static func getPositionInfo(location:String) -> Observable<NSData> {
+    public static func getPositionInfo(location:String) -> Observable<NSData> {
         let s = SonosCommand(serviceType: SonosService.AVTransportService, version: 1, action: SonosService.GetPositionInfoAction, arguments: ["InstanceID":"0"])
         return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
     
-    static func getCurrentTrackMetaData(location:String) -> Observable<AEXMLDocument> {
+    public static func getCurrentTrackMetaData(location:String) -> Observable<AEXMLDocument> {
         return getPositionInfo(location)
             .flatMap(toXmlDocument)
             .flatMap({ (document) -> Observable<AEXMLDocument> in
@@ -108,7 +108,7 @@ class SonosApiClient {
             })
     }
     
-    static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
+    public static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
             // logger.debug(data.asXmlDocument()?.xmlString)
             return Observable.just(try AEXMLDocument(xmlData: data))

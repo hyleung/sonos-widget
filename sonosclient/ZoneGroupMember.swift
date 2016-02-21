@@ -9,12 +9,12 @@
 import Foundation
 import AEXML
 
-struct ZoneGroupMember {
-    let zoneName:String
-    let uuid:String
-    let location:NSURL
+public struct ZoneGroupMember {
+    public let zoneName:String
+    public let uuid:String
+    public let location:NSURL
     
-    static func fromZoneGroupMemberElement(element:AEXMLElement) -> ZoneGroupMember? {
+    public static func fromZoneGroupMemberElement(element:AEXMLElement) -> ZoneGroupMember? {
         if  let zoneName = element.attributes["ZoneName"],
             let uuid = element.attributes["UUID"],
             let location = element.attributes["Location"],
@@ -24,7 +24,7 @@ struct ZoneGroupMember {
             return .None
         }
     }
-    static func fromXml(xmlString:String) -> ZoneGroupMember? {
+    public static func fromXml(xmlString:String) -> ZoneGroupMember? {
         return xmlString
             .dataUsingEncoding(NSUTF8StringEncoding)?
             .asXmlDocument()

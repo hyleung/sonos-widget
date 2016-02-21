@@ -7,17 +7,16 @@
 //
 import CocoaAsyncSocket
 import RxSwift
-import RxCocoa
 import XCGLogger
 
-class SonosDiscoveryClient {
+public class SonosDiscoveryClient {
 
-    static func performDiscovery() -> Observable<String> {
+    public static func performDiscovery() -> Observable<String> {
         let msg = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
         return rxSendMulticast("239.255.255.250", port:1900, message: msg)
     }
     
-    static func performZoneQuery() -> Observable<String> {
+    public static func performZoneQuery() -> Observable<String> {
         return SonosDiscoveryClient.parseDiscoveryResponse(SonosDiscoveryClient
             .performDiscovery())
             .flatMap({resp -> Observable<String> in
@@ -31,7 +30,7 @@ class SonosDiscoveryClient {
             })
     }
     
-    static func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
+    public static func parseDiscoveryResponse(response:Observable<String>) -> Observable<Dictionary<String,String>> {
         return response.map{ s in self.lines(s) }
             .map{ line in self.parseMap(line) }
     }

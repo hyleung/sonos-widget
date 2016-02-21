@@ -8,7 +8,7 @@
 
 import Foundation
 import AEXML
-extension NSData {
+public extension NSData {
     func asXmlDocument() -> AEXMLDocument? {
         do {
             return try AEXMLDocument(xmlData: self)

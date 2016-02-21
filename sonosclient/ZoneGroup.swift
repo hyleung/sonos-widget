@@ -9,12 +9,12 @@
 import Foundation
 import AEXML
 
-struct ZoneGroup {
-    let groupCoordinator:String
-    let id:String
-    let members:[ZoneGroupMember]?
+public struct ZoneGroup {
+    public let groupCoordinator:String
+    public let id:String
+    public let members:[ZoneGroupMember]?
     
-    static func fromZoneGroupElement(e:AEXMLElement) -> ZoneGroup? {
+    public static func fromZoneGroupElement(e:AEXMLElement) -> ZoneGroup? {
         if  let id = e.attributes["ID"],
             let coordindator = e.attributes["Coordinator"] {
                 let groupMembers:[ZoneGroupMember]? = e["ZoneGroupMember"]
@@ -25,7 +25,7 @@ struct ZoneGroup {
         return .None
     }
     
-    static func fromXml(xmlString:String) -> [ZoneGroup]? {
+    public static func fromXml(xmlString:String) -> [ZoneGroup]? {
         return xmlString
             .dataUsingEncoding(NSUTF8StringEncoding)?
             .asXmlDocument()
@@ -35,13 +35,13 @@ struct ZoneGroup {
             .flatMap(groupsFromElementArray)
     }
     
-    private static func groupMembersFromElementArray(elements:[AEXMLElement]) -> [ZoneGroupMember]? {
+    public static func groupMembersFromElementArray(elements:[AEXMLElement]) -> [ZoneGroupMember]? {
         return elements.flatMap({(element:AEXMLElement) in
             return ZoneGroupMember.fromZoneGroupMemberElement(element)
         })
     }
     
-    static func groupsFromElementArray(elements:[AEXMLElement]) -> [ZoneGroup]? {
+    public static func groupsFromElementArray(elements:[AEXMLElement]) -> [ZoneGroup]? {
         return elements.flatMap(fromZoneGroupElement)
     }
 }

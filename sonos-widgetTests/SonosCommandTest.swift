@@ -11,6 +11,7 @@ import SwiftClient
 import AEXML
 import RxSwift
 @testable import sonos_widget
+import sonosclient
 class SonosCommandTest: XCTestCase {
 
     override func setUp() {
@@ -35,13 +36,13 @@ class SonosCommandTest: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
-        XCTAssertTrue(s.asXml()!.containsString(s.actionHeader()))
+        XCTAssertTrue(s.asXml()!.containsString(s.serviceNamespace()))
         XCTAssertNotNil(s.asXml())
     }
     
     func testShouldReturnActionHeader() {
         let s = SonosCommand(serviceType: SonosService.ZoneGroupTopologyService, version: 1, action: SonosService.GetZoneGroupStateAction, arguments: .None)
-        XCTAssertEqual("urn:schemas-upnp-org:service:serviceType:ZoneGroupTopology:1#GetZoneGroupState", s.actionHeader())
+        XCTAssertEqual("urn:schemas-upnp-org:service:ZoneGroupTopology:1#GetZoneGroupState", s.actionHeader())
     }
     
     func testShouldSerializeArgs() {

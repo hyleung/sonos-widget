@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import SwiftClient
 import AEXML
+import sonosclient
 class ViewController: UIViewController, UITableViewDelegate {
 
     

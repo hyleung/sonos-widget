@@ -12,7 +12,15 @@ target 'sonos-widget' do
     pod 'AEXML', '~> 2.0.1'
     pod 'SwiftClient', '~> 2.0.2'
 end
-
+target 'sonosclient' do
+    pod 'CocoaAsyncSocket'
+    pod 'RxSwift',    '~> 2.0'
+    pod 'RxBlocking', '~> 2.0'
+    pod 'RxCocoa',    '~> 2.0'
+    pod 'XCGLogger', '~> 3.2'
+    pod 'AEXML', '~> 2.0.1'
+    pod 'SwiftClient', '~> 2.0.2'
+end
 target 'sonos-widgetTests' do
 
 end

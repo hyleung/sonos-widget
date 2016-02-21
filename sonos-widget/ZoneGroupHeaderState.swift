@@ -9,6 +9,7 @@
 import Foundation
 import XCGLogger
 import RxSwift
+import sonosclient
 
 protocol ZoneGroupHeaderView {
     func setState(newState:ZoneGroupHeaderState) -> Void

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     func unescapeXml() -> String {
         return self.stringByReplacingOccurrencesOfString("&lt;", withString: "<")
             .stringByReplacingOccurrencesOfString("&gt;", withString: ">")

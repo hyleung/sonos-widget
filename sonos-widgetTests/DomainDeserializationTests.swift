@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 @testable import sonos_widget
-
+import sonosclient
 class DomainSerializationTests: XCTestCase {
     let zoneGroupsData =
 "    <ZoneGroups>" +

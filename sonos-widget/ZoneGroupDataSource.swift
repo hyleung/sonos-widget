@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import XCGLogger
+import sonosclient
+
 class ZoneGroupDataSource:NSObject, UITableViewDataSource {
     var data:[ZoneGroup]?
 
