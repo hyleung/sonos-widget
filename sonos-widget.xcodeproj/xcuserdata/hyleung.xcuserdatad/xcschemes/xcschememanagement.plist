@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>SonosTodayExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>SonosWidget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +38,11 @@
 			<true/>
 		</dict>
 		<key>F02C42DF1C2FB09D00E4F20C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F04FEC9B1C7AB16A0057C90B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
