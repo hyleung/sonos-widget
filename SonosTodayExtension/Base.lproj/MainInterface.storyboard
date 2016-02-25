@@ -3,24 +3,52 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
         <scene sceneID="0W7-na-VFb">
             <objects>
                 <tableViewController id="le2-kl-JE3" customClass="TodayViewController" customModule="SonosTodayExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gwj-SD-DRP">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" id="gwj-SD-DRP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="KJc-2h-vU8">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SonosGroupCell" rowHeight="103" id="KJc-2h-vU8" customClass="SonosGroupCell" customModule="SonosTodayExtension" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="103"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KJc-2h-vU8" id="Gvg-YG-k2J">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="102.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAc-PS-jCv">
+                                            <rect key="frame" x="259" y="7" width="46" height="89"/>
+                                            <state key="normal" title="Button">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ZoneGroupLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gu-iq-Yl4">
+                                            <rect key="frame" x="0.0" y="11" width="108" height="80"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wAc-PS-jCv" secondAttribute="trailing" constant="7" id="3rU-0V-Ugh"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="wAc-PS-jCv" secondAttribute="bottom" constant="-1.5" id="Cy0-xa-LTk"/>
+                                        <constraint firstItem="wAc-PS-jCv" firstAttribute="top" secondItem="Gvg-YG-k2J" secondAttribute="topMargin" constant="-1" id="IHP-5r-0Qr"/>
+                                        <constraint firstItem="0Gu-iq-Yl4" firstAttribute="top" secondItem="Gvg-YG-k2J" secondAttribute="topMargin" constant="3" id="Yzc-hf-hoa"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="0Gu-iq-Yl4" secondAttribute="bottom" constant="3.5" id="jIP-el-EdO"/>
+                                        <constraint firstItem="wAc-PS-jCv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Gu-iq-Yl4" secondAttribute="trailing" constant="8" id="n8n-O9-ITY"/>
+                                        <constraint firstItem="0Gu-iq-Yl4" firstAttribute="leading" secondItem="Gvg-YG-k2J" secondAttribute="leadingMargin" id="nM2-gh-Yb2"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="button" destination="wAc-PS-jCv" id="Km3-Gn-V2W"/>
+                                    <outlet property="label" destination="0Gu-iq-Yl4" id="zG1-g9-D46"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

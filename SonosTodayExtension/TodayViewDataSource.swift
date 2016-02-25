@@ -23,11 +23,14 @@ class TodayViewDataSource:NSObject, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         logger.info("tablecell for \(indexPath)")
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        if let groupName = data?[indexPath.row].groupCoordinator {
+        let cell = tableView.dequeueReusableCellWithIdentifier("SonosGroupCell", forIndexPath: indexPath) as! SonosGroupCell
+        if let members = data?[indexPath.row].members {
             cell.backgroundColor = UIColor.clearColor()
-            cell.textLabel?.textColor = UIColor.whiteColor()
-            cell.textLabel?.text = "\(groupName.unescapeXml())"
+            let title = members.map({ (member) -> String in
+                member.zoneName.unescapeXml()
+            }).joinWithSeparator(", ")
+            
+            cell.label.text = title
         }
         return cell
     }

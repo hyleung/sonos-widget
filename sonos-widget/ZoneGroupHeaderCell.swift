@@ -11,7 +11,6 @@ import UIKit
 import XCGLogger
 import RxSwift
 import RxCocoa
-import XCGLogger
 
 class ZoneGroupHeaderCell: UITableViewCell, ZoneGroupHeaderView {
     private var state:ZoneGroupHeaderState?
