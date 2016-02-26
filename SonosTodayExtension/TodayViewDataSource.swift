@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 import XCGLogger
 import sonosclient
+import AEXML
 
 class TodayViewDataSource:NSObject, UITableViewDataSource {
-    var data:[ZoneGroup]?
+    var data:[SonosGroupCellViewModel]?
     
     @objc func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -22,15 +23,10 @@ class TodayViewDataSource:NSObject, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        logger.info("tablecell for \(indexPath)")
         let cell = tableView.dequeueReusableCellWithIdentifier("SonosGroupCell", forIndexPath: indexPath) as! SonosGroupCell
-        if let members = data?[indexPath.row].members {
-            cell.backgroundColor = UIColor.clearColor()
-            let title = members.map({ (member) -> String in
-                member.zoneName.unescapeXml()
-            }).joinWithSeparator(", ")
-            
-            cell.label.text = title
+        if  let viewModel = data?[indexPath.row] {
+            logger.info("tablecell for \(viewModel)")
+            cell.label.text = viewModel.title
         }
         return cell
     }

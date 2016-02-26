@@ -10,6 +10,7 @@ import UIKit
 import NotificationCenter
 import RxSwift
 import XCGLogger
+import AEXML
 import sonosclient
 
 
@@ -33,10 +34,23 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         logger.info("performing update")
+        
+        
         discoveryObservable
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { (groups:[ZoneGroup]?) -> Void in
-                    logger.info("groups: \(groups?.count)")
+            .map{ (groups:[ZoneGroup]?) -> [SonosGroupCellViewModel]? in
+                groups?.map{ (group:ZoneGroup) -> SonosGroupCellViewModel in
+                    let title = group.members?.map({ (member:ZoneGroupMember) -> String in
+                        member.zoneName.unescapeXml()
+                    }).joinWithSeparator(", ")
+                    let coordinator =  group.members?.filter{ (element:ZoneGroupMember) -> Bool in
+                        element.uuid == group.groupCoordinator
+                        }.first
+                    let locationUrl = "http://\(coordinator!.location.host!):\(coordinator!.location.port!)"
+                    return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl)
+                }
+            }
+            .subscribe(onNext: { (groups:[SonosGroupCellViewModel]?) -> Void in
                     self.datasource.data = groups
                     self.tableView.reloadData()
                     self.updatePreferredContentSize()
