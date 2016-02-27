@@ -10,4 +10,5 @@ import Foundation
 struct SonosGroupCellViewModel {
     let title:String
     let locationUrl:String
+    let groupState:String
 }

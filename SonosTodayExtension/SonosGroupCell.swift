@@ -31,9 +31,9 @@ class SonosGroupCell: UITableViewCell, SonosGroupView {
     
     
     override func willMoveToSuperview(newSuperview: UIView?) {
-//        button.rx_tap.subscribeNext { () -> Void in
-//            self.state?.advance(self)
-//            }.addDisposableTo(disposeBag)
+        button.rx_tap.subscribeNext { () -> Void in
+            self.state?.advance(self)
+            }.addDisposableTo(disposeBag)
     }
     
     override func willRemoveSubview(subview: UIView) {
@@ -44,7 +44,7 @@ class SonosGroupCell: UITableViewCell, SonosGroupView {
         self.state = newState
     }
     func setButtonText(txt:String) -> Void {
-        
+        self.button.setTitle(txt, forState: UIControlState.Normal)
     }
     func getDisposeBag() -> DisposeBag {
         return self.disposeBag

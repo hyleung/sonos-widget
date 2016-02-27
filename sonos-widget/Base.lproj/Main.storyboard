@@ -44,26 +44,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="75.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Track title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssr-fH-XUT">
-                                                    <rect key="frame" x="18" y="8" width="274" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssr-fH-XUT">
+                                                    <rect key="frame" x="18" y="8" width="68" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEn-1O-ftW">
-                                                    <rect key="frame" x="300" y="12" width="50" height="50"/>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEn-1O-ftW">
+                                                    <rect key="frame" x="339" y="12" width="22" height="50"/>
                                                     <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                     <state key="normal" image="Play"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCk-m0-kYC">
                                                     <rect key="frame" x="18" y="31" width="68" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="pEn-1O-ftW" firstAttribute="leading" secondItem="4cT-th-d91" secondAttribute="leadingMargin" constant="292" id="0dZ-Ly-UTm"/>
                                                 <constraint firstItem="Ssr-fH-XUT" firstAttribute="leading" secondItem="4cT-th-d91" secondAttribute="leadingMargin" constant="10" id="2aJ-Qb-K5p"/>
                                                 <constraint firstItem="aCk-m0-kYC" firstAttribute="top" secondItem="Ssr-fH-XUT" secondAttribute="bottom" constant="5" id="8ic-zU-cZW"/>
                                                 <constraint firstItem="pEn-1O-ftW" firstAttribute="centerY" secondItem="4cT-th-d91" secondAttribute="centerY" id="Bh7-vZ-97s"/>
@@ -72,10 +71,10 @@
                                                 <constraint firstItem="aCk-m0-kYC" firstAttribute="centerX" secondItem="Ssr-fH-XUT" secondAttribute="centerX" id="cxT-F2-Uvv"/>
                                                 <constraint firstAttribute="topMargin" secondItem="Ssr-fH-XUT" secondAttribute="top" id="juS-4V-CSM"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="pEn-1O-ftW" secondAttribute="bottom" constant="5.5" id="xNF-kg-Hm9"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="pEn-1O-ftW" secondAttribute="trailing" constant="15" id="zQO-Au-xZF"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pEn-1O-ftW" secondAttribute="trailing" constant="5" id="zQO-Au-xZF"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="artistLabel" destination="aCk-m0-kYC" id="dlJ-1U-tji"/>
                                             <outlet property="headerLabel" destination="Ssr-fH-XUT" id="g3K-nf-N4P"/>
@@ -110,6 +109,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Play" width="50" height="50"/>
+        <image name="Play" width="22" height="22"/>
     </resources>
 </document>

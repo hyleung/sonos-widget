@@ -47,7 +47,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                         element.uuid == group.groupCoordinator
                         }.first
                     let locationUrl = "http://\(coordinator!.location.host!):\(coordinator!.location.port!)"
-                    return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl)
+                    return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl, groupState: "STOPPED")
                 }
             }
             .subscribe(onNext: { (groups:[SonosGroupCellViewModel]?) -> Void in
@@ -68,5 +68,4 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
         .flatMap(SonosApiClient.rx_getZoneGroupState)
-    
 }

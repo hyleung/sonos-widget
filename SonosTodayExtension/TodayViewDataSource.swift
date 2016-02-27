@@ -26,7 +26,10 @@ class TodayViewDataSource:NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("SonosGroupCell", forIndexPath: indexPath) as! SonosGroupCell
         if  let viewModel = data?[indexPath.row] {
             logger.info("tablecell for \(viewModel)")
+            cell.initialize( viewModel.groupState, location: viewModel.locationUrl)
             cell.label.text = viewModel.title
+        } else {
+            cell.label.text = "Ruh-roh"
         }
         return cell
     }

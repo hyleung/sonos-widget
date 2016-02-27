@@ -54,17 +54,17 @@ class ViewController: UIViewController, UITableViewDelegate {
                 logger.info("Group coordinator: \(locationUrl)")
                 let rxTransportState = SonosApiClient
                     .rx_getTransportInfo(locationUrl)
-                    .flatMap({(element:AEXMLElement) -> Observable<String> in
+                    .flatMap{ (element:AEXMLElement) -> Observable<String> in
                         if let state = element["CurrentTransportState"].value {
                             return Observable.just(state)
                         } else {
                             return Observable.empty()
                         }
-                    }).subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
+                    }.subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
                 let rxCurrentTrack = SonosApiClient
                     .getCurrentTrackMetaData(locationUrl)
-                    .flatMap({(doc:AEXMLDocument) -> Observable<TrackInfo> in
+                    .flatMap{(doc:AEXMLDocument) -> Observable<TrackInfo> in
                         if let title = doc["DIDL-Lite"]["item"]["dc:title"].value,
                             let creator = doc["DIDL-Lite"]["item"]["dc:creator"].value {
                                 if (title.containsString("not found") && creator.containsString("not found")) {
@@ -73,7 +73,7 @@ class ViewController: UIViewController, UITableViewDelegate {
                                 return Observable.just(TrackInfo(title: title, artist: creator))
                         }
                         return Observable.empty()
-                    }).subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
+                    }.subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
                 let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:String, trackInfo:TrackInfo) -> (String, TrackInfo) in
                     return (state, trackInfo)
