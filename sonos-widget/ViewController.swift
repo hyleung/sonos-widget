@@ -54,40 +54,25 @@ class ViewController: UIViewController, UITableViewDelegate {
                 logger.info("Group coordinator: \(locationUrl)")
                 let rxTransportState = SonosApiClient
                     .rx_getTransportInfo(locationUrl)
-                    .flatMap{ (element:AEXMLElement) -> Observable<String> in
-                        if let state = element["CurrentTransportState"].value {
-                            return Observable.just(state)
-                        } else {
-                            return Observable.empty()
-                        }
-                    }.subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
                 let rxCurrentTrack = SonosApiClient
                     .getCurrentTrackMetaData(locationUrl)
-                    .flatMap{(doc:AEXMLDocument) -> Observable<TrackInfo> in
-                        if let title = doc["DIDL-Lite"]["item"]["dc:title"].value,
-                            let creator = doc["DIDL-Lite"]["item"]["dc:creator"].value {
-                                if (title.containsString("not found") && creator.containsString("not found")) {
-                                    return Observable.just(TrackInfo(title: "No track", artist:.None))
-                                }
-                                return Observable.just(TrackInfo(title: title, artist: creator))
-                        }
-                        return Observable.empty()
-                    }.subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
+                    .subscribeOn(ConcurrentDispatchQueueScheduler(globalConcurrentQueueQOS: DispatchQueueSchedulerQOS.Background))
 
-                let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:String, trackInfo:TrackInfo) -> (String, TrackInfo) in
+                let zipped = Observable.zip(rxTransportState, rxCurrentTrack, resultSelector: { (state:TransportInfo, trackInfo:TrackInfo) -> (TransportInfo, TrackInfo) in
                     return (state, trackInfo)
                 })
 
                 zipped
                     .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { (element:(String, TrackInfo)) -> Void in
+                    .subscribe(onNext: { (element:(TransportInfo, TrackInfo)) -> Void in
                             let state = element.0
                             let trackInfo = element.1
                             logger.info("Group state: \(state)")
                             headerCell.headerLabel.text = trackInfo.title
                             headerCell.artistLabel.text = trackInfo.artist
-                            ViewController.updateHeaderCell(headerCell, groupState: state, location: locationUrl)
+                            ViewController.updateHeaderCell(headerCell, groupState: state.transportState, location: locationUrl)
                         
                         }, onError: { err -> Void in
                             logger.error("Error: \(err)")
@@ -130,5 +115,6 @@ class ViewController: UIViewController, UITableViewDelegate {
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
         .flatMap(SonosApiClient.rx_getZoneGroupState)
+        .toArray()
 
 }

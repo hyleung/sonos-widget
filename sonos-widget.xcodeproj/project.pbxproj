@@ -17,6 +17,7 @@
 		F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02C42D61C2FB09D00E4F20C /* Assets.xcassets */; };
 		F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */; };
 		F02EE42F1C8005E20047428C /* SonosGroupCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EE42E1C8005E20047428C /* SonosGroupCellViewModel.swift */; };
+		F02EE4311C827E660047428C /* TransportInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EE4301C827E660047428C /* TransportInfo.swift */; };
 		F038F2491C4892A80083053E /* SonosDiscoveryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */; };
 		F038F24F1C4ABAA50083053E /* SonosCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */; };
 		F04FEC9E1C7AB16A0057C90B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04FEC9D1C7AB16A0057C90B /* NotificationCenter.framework */; };
@@ -130,6 +131,7 @@
 		F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sonos_widgetTests.swift; sourceTree = "<group>"; };
 		F02C42E61C2FB09D00E4F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F02EE42E1C8005E20047428C /* SonosGroupCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosGroupCellViewModel.swift; sourceTree = "<group>"; };
+		F02EE4301C827E660047428C /* TransportInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportInfo.swift; sourceTree = "<group>"; };
 		F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosDiscoveryTest.swift; sourceTree = "<group>"; };
 		F038F24C1C4AB94E0083053E /* SonosCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosCommand.swift; sourceTree = "<group>"; };
 		F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosCommandTest.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				F06FB9591C5719DC00473B32 /* ZoneGroup.swift */,
 				F06FB95D1C58879800473B32 /* ZoneGroupMember.swift */,
 				F020E69C1C760FB000E1ED1D /* TrackInfo.swift */,
+				F02EE4301C827E660047428C /* TransportInfo.swift */,
 			);
 			name = Domain;
 			path = "../sonos-widget";
@@ -689,6 +692,7 @@
 				F0F140631C7968DD009CCC5D /* SonosCommand.swift in Sources */,
 				F0F140661C79694D009CCC5D /* SonosClient.swift in Sources */,
 				F0F1405B1C7968DD009CCC5D /* ZoneGroup.swift in Sources */,
+				F02EE4311C827E660047428C /* TransportInfo.swift in Sources */,
 				F0F140611C7968DD009CCC5D /* RxGCDAsyncUdpSocketDelegateProxy.swift in Sources */,
 				F0F1405D1C7968DD009CCC5D /* TrackInfo.swift in Sources */,
 				F0F1405F1C7968DD009CCC5D /* String+Ext.swift in Sources */,

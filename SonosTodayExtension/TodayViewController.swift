@@ -25,12 +25,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         logger.info("viewDidLoad")
 
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         logger.info("performing update")
@@ -38,18 +38,18 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         discoveryObservable
             .observeOn(MainScheduler.instance)
-            .map{ (groups:[ZoneGroup]?) -> [SonosGroupCellViewModel]? in
-                groups?.map{ (group:ZoneGroup) -> SonosGroupCellViewModel in
-                    let title = group.members?.map({ (member:ZoneGroupMember) -> String in
-                        member.zoneName.unescapeXml()
-                    }).joinWithSeparator(", ")
-                    let coordinator =  group.members?.filter{ (element:ZoneGroupMember) -> Bool in
-                        element.uuid == group.groupCoordinator
-                        }.first
-                    let locationUrl = "http://\(coordinator!.location.host!):\(coordinator!.location.port!)"
-                    return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl, groupState: "STOPPED")
-                }
+            .map{ (group:ZoneGroup) -> SonosGroupCellViewModel in
+                let title = group.members?.map({ (member:ZoneGroupMember) -> String in
+                    member.zoneName.unescapeXml()
+                }).joinWithSeparator(", ")
+                let coordinator =  group.members?.filter{ (element:ZoneGroupMember) -> Bool in
+                    element.uuid == group.groupCoordinator
+                    }.first
+                let locationUrl = "http://\(coordinator!.location.host!):\(coordinator!.location.port!)"
+                return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl, groupState: "STOPPED")
+                
             }
+            .toArray()
             .subscribe(onNext: { (groups:[SonosGroupCellViewModel]?) -> Void in
                     self.datasource.data = groups
                     self.tableView.reloadData()
@@ -60,7 +60,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     completionHandler(.NoData)
                 }, onCompleted: nil, onDisposed: nil)
     }
-    
+
     func updatePreferredContentSize() {
             preferredContentSize = CGSizeMake(CGFloat(0), CGFloat(tableView(tableView, numberOfRowsInSection: 0)) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
     }

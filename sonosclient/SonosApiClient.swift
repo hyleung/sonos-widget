@@ -40,7 +40,7 @@ public class SonosApiClient {
         return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/ZoneGroupTopology/Control", command: s)
     }
 
-    public static func rx_getZoneGroupState(location:String) -> Observable<[ZoneGroup]> {
+    public static func rx_getZoneGroupState(location:String) -> Observable<ZoneGroup> {
         return getZoneGroupState(location)
             .flatMap(toXmlDocument)
             .map({ xml -> String in
@@ -57,6 +57,15 @@ public class SonosApiClient {
                     g1.members?.count > g2.members?.count
                 })
             })
+            .flatMap{ (groups:[ZoneGroup]) -> Observable<ZoneGroup> in
+                Observable.create({ subscriber in
+                    groups.forEach({ (group) -> () in
+                        subscriber.onNext(group)
+                    })
+                    subscriber.onCompleted()
+                    return NopDisposable.instance
+                })
+            }
     }
 
     public static func getTransportInfo(location:String) -> Observable<NSData> {
@@ -64,12 +73,19 @@ public class SonosApiClient {
         return SonosApiClient.executeAction({ () in return Client() }, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
 
-    public static func rx_getTransportInfo(location:String) -> Observable<AEXMLElement> {
+    public static func rx_getTransportInfo(location:String) -> Observable<TransportInfo> {
         return getTransportInfo(location)
             .flatMap(toXmlDocument)
             .map({ xml -> AEXMLElement in
                     return xml["s:Envelope"]["s:Body"]["u:GetTransportInfoResponse"]
             })
+            .flatMap{ (element:AEXMLElement) -> Observable<TransportInfo> in
+                if let state = element["CurrentTransportState"].value {
+                    return Observable.just(TransportInfo(transportState:state))
+                } else {
+                    return Observable.empty()
+                }
+            }
     }
 
     public static func play(location:String) -> Observable<NSData> {
@@ -88,7 +104,7 @@ public class SonosApiClient {
         return executeAction({() in return Client()}, baseUrl: location, path: "/MediaRenderer/AVTransport/Control", command: s)
     }
     
-    public static func getCurrentTrackMetaData(location:String) -> Observable<AEXMLDocument> {
+    public static func getCurrentTrackMetaData(location:String) -> Observable<TrackInfo> {
         return getPositionInfo(location)
             .flatMap(toXmlDocument)
             .flatMap({ (document) -> Observable<AEXMLDocument> in
@@ -106,6 +122,16 @@ public class SonosApiClient {
                 //empty document
                 return Observable.just(AEXMLDocument())
             })
+            .flatMap{(doc:AEXMLDocument) -> Observable<TrackInfo> in
+                if let title = doc["DIDL-Lite"]["item"]["dc:title"].value,
+                    let creator = doc["DIDL-Lite"]["item"]["dc:creator"].value {
+                        if (title.containsString("not found") && creator.containsString("not found")) {
+                            return Observable.just(TrackInfo(title: "No track", artist:.None))
+                        }
+                        return Observable.just(TrackInfo(title: title, artist: creator))
+                }
+                return Observable.empty()
+            }
     }
     
     public static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
