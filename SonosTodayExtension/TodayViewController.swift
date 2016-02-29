@@ -34,11 +34,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         logger.info("performing update")
-        
+    
         
         discoveryObservable
-            .observeOn(MainScheduler.instance)
-            .map{ (group:ZoneGroup) -> SonosGroupCellViewModel in
+            .flatMap{ (group:ZoneGroup) -> Observable<SonosGroupCellViewModel> in
                 let title = group.members?.map({ (member:ZoneGroupMember) -> String in
                     member.zoneName.unescapeXml()
                 }).joinWithSeparator(", ")
@@ -46,19 +45,22 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     element.uuid == group.groupCoordinator
                     }.first
                 let locationUrl = "http://\(coordinator!.location.host!):\(coordinator!.location.port!)"
-                return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl, groupState: "STOPPED")
-                
+                return SonosApiClient
+                    .rx_getTransportInfo(locationUrl)
+                    .map{ (transportInfo:TransportInfo) -> SonosGroupCellViewModel in
+                        return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl, groupState: transportInfo.transportState)
+                }
             }
             .toArray()
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (groups:[SonosGroupCellViewModel]?) -> Void in
                     self.datasource.data = groups
                     self.tableView.reloadData()
                     self.updatePreferredContentSize()
-                    completionHandler(.NewData)
                 }, onError: { (err) -> Void in
                     logger.error("Error: \(err)")
                     completionHandler(.NoData)
-                }, onCompleted: nil, onDisposed: nil)
+                }, onCompleted: { () in completionHandler(.NewData) }, onDisposed: nil)
     }
 
     func updatePreferredContentSize() {

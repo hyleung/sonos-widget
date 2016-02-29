@@ -18,6 +18,7 @@
 		F02C42E51C2FB09D00E4F20C /* sonos_widgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C42E41C2FB09D00E4F20C /* sonos_widgetTests.swift */; };
 		F02EE42F1C8005E20047428C /* SonosGroupCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EE42E1C8005E20047428C /* SonosGroupCellViewModel.swift */; };
 		F02EE4311C827E660047428C /* TransportInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EE4301C827E660047428C /* TransportInfo.swift */; };
+		F02EE4351C83FBC50047428C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F02EE4341C83FBC50047428C /* Assets.xcassets */; };
 		F038F2491C4892A80083053E /* SonosDiscoveryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */; };
 		F038F24F1C4ABAA50083053E /* SonosCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */; };
 		F04FEC9E1C7AB16A0057C90B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F04FEC9D1C7AB16A0057C90B /* NotificationCenter.framework */; };
@@ -132,6 +133,7 @@
 		F02C42E61C2FB09D00E4F20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F02EE42E1C8005E20047428C /* SonosGroupCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosGroupCellViewModel.swift; sourceTree = "<group>"; };
 		F02EE4301C827E660047428C /* TransportInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportInfo.swift; sourceTree = "<group>"; };
+		F02EE4341C83FBC50047428C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F038F2481C4892A80083053E /* SonosDiscoveryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosDiscoveryTest.swift; sourceTree = "<group>"; };
 		F038F24C1C4AB94E0083053E /* SonosCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosCommand.swift; sourceTree = "<group>"; };
 		F038F24E1C4ABAA50083053E /* SonosCommandTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosCommandTest.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				F0C5E92B1C7D60A3002E9F02 /* SonosTodayExtension.swift */,
 				F0C5E92D1C7EAD4C002E9F02 /* SonosGroupCell.swift */,
 				F02EE42E1C8005E20047428C /* SonosGroupCellViewModel.swift */,
+				F02EE4341C83FBC50047428C /* Assets.xcassets */,
 			);
 			path = SonosTodayExtension;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F02EE4351C83FBC50047428C /* Assets.xcassets in Resources */,
 				F04FECA41C7AB16A0057C90B /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -842,7 +846,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "sonos-widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eightpoundsofhate.sonos-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cargocultism.sonos-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -857,7 +861,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "sonos-widget/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eightpoundsofhate.sonos-widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cargocultism.sonos-widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -895,7 +899,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SonosTodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eightpoundsofhate.sonos-widget.SonosTodayExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cargocultism.sonos-widget.SonosTodayExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -909,7 +913,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SonosTodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eightpoundsofhate.sonos-widget.SonosTodayExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.cargocultism.sonos-widget.SonosTodayExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

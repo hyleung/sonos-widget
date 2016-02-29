@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
+        return 75.0
     }
 
     static func updateHeaderCell(cell:ZoneGroupHeaderCell, groupState:String, location:String) -> Void {

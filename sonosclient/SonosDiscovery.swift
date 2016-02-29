@@ -10,10 +10,10 @@ import RxSwift
 import XCGLogger
 
 public class SonosDiscoveryClient {
-
+    static let multicast_port:UInt16 = 1900
     public static func performDiscovery() -> Observable<String> {
-        let msg = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
-        return rxSendMulticast("239.255.255.250", port:1900, message: msg)
+        let msg = "M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:\(multicast_port)\r\nMAN: \"ssdp:discover\"\r\nMX: 1\r\nST: urn:schemas-upnp-org:device:ZonePlayer:1"
+        return rxSendMulticast("239.255.255.250", port:multicast_port, message: msg)
     }
     
     public static func performZoneQuery() -> Observable<String> {
