@@ -54,13 +54,10 @@ class SonosGroupCell: UITableViewCell, SonosGroupView {
     
     func updateButtonState() {
         if (self.state is Paused) {
-//            self.button.setTitle("Play", forState: UIControlState.Normal)
             self.button.setImage(playImage,  forState: UIControlState.Normal)
         } else if (self.state is Stopped) {
-//            self.button.setTitle("Pause", forState: UIControlState.Normal)
-            self.button.setImage(pauseImage, forState: UIControlState.Normal)
+            self.button.setImage(playImage, forState: UIControlState.Normal)
         } else {
-//            self.button.setTitle("Pause", forState: UIControlState.Normal)
             self.button.setImage(pauseImage, forState: UIControlState.Normal)
         }
     }
