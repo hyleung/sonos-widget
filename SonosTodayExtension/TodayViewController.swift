@@ -34,7 +34,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         logger.info("performing update")
-    
         
         discoveryObservable
             .flatMap{ (group:ZoneGroup) -> Observable<SonosGroupCellViewModel> in
@@ -56,15 +55,16 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             .subscribe(onNext: { (groups:[SonosGroupCellViewModel]?) -> Void in
                     self.datasource.data = groups
                     self.tableView.reloadData()
-                    self.updatePreferredContentSize()
+                    self.updatePreferredContentSize(groups!.count)
                 }, onError: { (err) -> Void in
                     logger.error("Error: \(err)")
                     completionHandler(.NoData)
                 }, onCompleted: { () in completionHandler(.NewData) }, onDisposed: nil)
     }
 
-    func updatePreferredContentSize() {
-            preferredContentSize = CGSizeMake(CGFloat(0), CGFloat(tableView(tableView, numberOfRowsInSection: 0)) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
+    func updatePreferredContentSize(rowCount:Int) {
+        preferredContentSize = CGSizeMake(CGFloat(0), CGFloat(rowCount) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
+        logger.info("preferred size \(preferredContentSize) for \(rowCount) rows")
     }
 
     private let discoveryObservable = SonosDiscoveryClient
