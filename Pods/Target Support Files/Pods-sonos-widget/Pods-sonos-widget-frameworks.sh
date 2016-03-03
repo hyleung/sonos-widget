@@ -86,6 +86,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-sonos-widget/AEXML.framework"
   install_framework "Pods-sonos-widget/CocoaAsyncSocket.framework"
+  install_framework "Pods-sonos-widget/ReachabilitySwift.framework"
   install_framework "Pods-sonos-widget/RxBlocking.framework"
   install_framework "Pods-sonos-widget/RxCocoa.framework"
   install_framework "Pods-sonos-widget/RxSwift.framework"
@@ -95,6 +96,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-sonos-widget/AEXML.framework"
   install_framework "Pods-sonos-widget/CocoaAsyncSocket.framework"
+  install_framework "Pods-sonos-widget/ReachabilitySwift.framework"
   install_framework "Pods-sonos-widget/RxBlocking.framework"
   install_framework "Pods-sonos-widget/RxCocoa.framework"
   install_framework "Pods-sonos-widget/RxSwift.framework"

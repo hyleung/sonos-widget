@@ -11,6 +11,7 @@ target 'sonos-widget' do
     pod 'XCGLogger', '~> 3.2'
     pod 'AEXML', '~> 2.0.1'
     pod 'SwiftClient', '~> 2.0.2'
+    pod 'ReachabilitySwift', '~> 2.3.3'
 end
 target 'sonosclient' do
     pod 'CocoaAsyncSocket'
@@ -29,6 +30,7 @@ target 'SonosTodayExtension' do
     pod 'XCGLogger', '~> 3.2'
     pod 'AEXML', '~> 2.0.1'
     pod 'SwiftClient', '~> 2.0.2'
+    pod 'ReachabilitySwift', '~> 2.3.3'
 end
 target 'sonos-widgetTests' do
 

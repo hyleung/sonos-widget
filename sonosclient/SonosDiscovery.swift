@@ -68,6 +68,7 @@ public class SonosDiscoveryClient {
                     socket.close()
                 }
                 socket.rx_data
+                    .timeout(2, scheduler: MainScheduler.instance)
                     .map{ data in
                         return String(data:data, encoding: NSUTF8StringEncoding)!
                     }

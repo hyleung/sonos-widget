@@ -1,6 +1,7 @@
 PODS:
   - AEXML (2.0.1)
   - CocoaAsyncSocket (7.4.2)
+  - ReachabilitySwift (2.3.3)
   - RxBlocking (2.0.0):
     - RxSwift (~> 2.0)
   - RxCocoa (2.0.0):
@@ -12,6 +13,7 @@ PODS:
 DEPENDENCIES:
   - AEXML (~> 2.0.1)
   - CocoaAsyncSocket
+  - ReachabilitySwift (~> 2.3.3)
   - RxBlocking (~> 2.0)
   - RxCocoa (~> 2.0)
   - RxSwift (~> 2.0)
@@ -21,6 +23,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AEXML: d6bb5b994521fcf3667ee8ccc1ed533f31b19218
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
+  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
   RxSwift: d83246efa6f16c50c143bec134649d045498f601

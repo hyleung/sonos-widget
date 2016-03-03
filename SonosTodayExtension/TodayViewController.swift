@@ -12,7 +12,7 @@ import RxSwift
 import XCGLogger
 import AEXML
 import sonosclient
-
+import ReachabilitySwift
 
 class TodayViewController: UITableViewController, NCWidgetProviding {
     private let datasource = TodayViewDataSource()
@@ -34,7 +34,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         logger.info("performing update")
-        
         discoveryObservable
             .flatMap{ (group:ZoneGroup) -> Observable<SonosGroupCellViewModel> in
                 let title = group.members?.map({ (member:ZoneGroupMember) -> String in
@@ -60,6 +59,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     logger.error("Error: \(err)")
                     completionHandler(.NoData)
                 }, onCompleted: { () in completionHandler(.NewData) }, onDisposed: nil)
+        
     }
 
     func updatePreferredContentSize(rowCount:Int) {
@@ -70,4 +70,6 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
         .flatMap(SonosApiClient.rx_getZoneGroupState)
+    
 }
+
