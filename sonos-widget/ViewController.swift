@@ -104,10 +104,13 @@ class ViewController: UIViewController, UITableViewDelegate {
                     logger.error("Error: \(err)")
                     self.activityIndicator.hidden = true
                     self.activityIndicator.stopAnimating()
+                    let nsErr = err as NSError
+                    self.displayTableBackground(nsErr.localizedDescription)
                 }, onCompleted: { () -> Void in
                     self.tableView.reloadData()
                     self.activityIndicator.hidden = true
                     self.activityIndicator.stopAnimating()
+                    self.hideTableBackground()
                 }, onDisposed: nil )
             .addDisposableTo(disposeBag)
     } 
@@ -116,5 +119,19 @@ class ViewController: UIViewController, UITableViewDelegate {
         .performZoneQuery()
         .flatMap(SonosApiClient.rx_getZoneGroupState)
         .toArray()
+
+    private func displayTableBackground(message:String) {
+        let label = UILabel(frame: CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height))
+        label.text = message
+        label.textAlignment = NSTextAlignment.Center
+        self.tableView.backgroundView = label
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    }
+
+
+    private func hideTableBackground() {
+        self.tableView.backgroundView = .None
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+    }
 
 }

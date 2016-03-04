@@ -51,7 +51,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEn-1O-ftW">
-                                                    <rect key="frame" x="339" y="12" width="22" height="50"/>
+                                                    <rect key="frame" x="333" y="12" width="28" height="50"/>
                                                     <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                     <state key="normal" image="Play"/>
                                                 </button>
@@ -109,6 +109,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Play" width="22" height="22"/>
+        <image name="Play" width="28" height="28"/>
     </resources>
 </document>
