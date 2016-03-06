@@ -57,8 +57,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     self.updatePreferredContentSize(groups!.count)
                 }, onError: { (err) -> Void in
                     logger.error("Error: \(err)")
+                    self.updatePreferredContentSize(1)
+                    self.displayTableBackground("Unable to connect to your Sonos system")
                     completionHandler(.NoData)
-                }, onCompleted: { () in completionHandler(.NewData) }, onDisposed: nil)
+                }, onCompleted: { () in
+                    completionHandler(.NewData)
+                    self.hideTableBackground()
+                }, onDisposed: nil)
         
     }
 
@@ -66,10 +71,26 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         preferredContentSize = CGSizeMake(CGFloat(0), CGFloat(rowCount) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
         logger.info("preferred size \(preferredContentSize) for \(rowCount) rows")
     }
-
+    
     private let discoveryObservable = SonosDiscoveryClient
         .performZoneQuery()
         .flatMap(SonosApiClient.rx_getZoneGroupState)
-    
+
+
+    private func displayTableBackground(message:String) {
+        let label = UILabel(frame: CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height))
+        label.text = message
+        label.font = UIFont.systemFontOfSize(14)
+        label.textColor = UIColor.whiteColor()
+        label.textAlignment = NSTextAlignment.Center
+        self.tableView.backgroundView = label
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    }
+
+
+    private func hideTableBackground() {
+        self.tableView.backgroundView = .None
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+    }
 }
 

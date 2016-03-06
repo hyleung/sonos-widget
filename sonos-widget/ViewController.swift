@@ -104,8 +104,7 @@ class ViewController: UIViewController, UITableViewDelegate {
                     logger.error("Error: \(err)")
                     self.activityIndicator.hidden = true
                     self.activityIndicator.stopAnimating()
-                    let nsErr = err as NSError
-                    self.displayTableBackground(nsErr.localizedDescription)
+                    self.displayTableBackground("Unable to connect to your Sonos system")
                 }, onCompleted: { () -> Void in
                     self.tableView.reloadData()
                     self.activityIndicator.hidden = true
