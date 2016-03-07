@@ -13,24 +13,36 @@ import XCGLogger
 import AEXML
 import sonosclient
 import ReachabilitySwift
-
+import TMCache
 class TodayViewController: UITableViewController, NCWidgetProviding {
     private let datasource = TodayViewDataSource()
+    private var disposeBag = DisposeBag()
+    var cachedViewModels:[SonosGroupCellViewModel]? {
+        get {
+            return TMCache.sharedCache().objectForKey("viewModels") as? [SonosGroupCellViewModel]
+        }
+        set(newItems) {
+            TMCache.sharedCache().setObject(newItems, forKey: "viewModels")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self.datasource
         self.tableView.delegate = self
         self.tableView.rowHeight = 50.0
         self.tableView.sectionFooterHeight = 5.0
-        logger.info("viewDidLoad")
-
+        updateTableData(self.cachedViewModels)
     }
-
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.disposeBag = DisposeBag()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         logger.info("performing update")
@@ -52,9 +64,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             .toArray()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (groups:[SonosGroupCellViewModel]?) -> Void in
-                    self.datasource.data = groups
-                    self.tableView.reloadData()
-                    self.updatePreferredContentSize(groups!.count)
+                    self.updateTableData(groups)
                 }, onError: { (err) -> Void in
                     logger.error("Error: \(err)")
                     self.updatePreferredContentSize(1)
@@ -64,9 +74,15 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     completionHandler(.NewData)
                     self.hideTableBackground()
                 }, onDisposed: nil)
+            .addDisposableTo(disposeBag)
         
     }
 
+    func updateTableData(data:[SonosGroupCellViewModel]?) {
+        self.datasource.data = data
+        self.tableView.reloadData()
+        self.updatePreferredContentSize(data?.count ?? 0)
+    }
     func updatePreferredContentSize(rowCount:Int) {
         preferredContentSize = CGSizeMake(CGFloat(0), CGFloat(rowCount) * CGFloat(tableView.rowHeight) + tableView.sectionFooterHeight)
         logger.info("preferred size \(preferredContentSize) for \(rowCount) rows")

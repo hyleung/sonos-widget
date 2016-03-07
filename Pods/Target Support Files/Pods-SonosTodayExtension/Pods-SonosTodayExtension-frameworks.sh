@@ -92,6 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SonosTodayExtension/RxSwift.framework"
   install_framework "Pods-SonosTodayExtension/SwiftClient.framework"
   install_framework "Pods-SonosTodayExtension/XCGLogger.framework"
+  install_framework "Pods-SonosTodayExtension/TMCache.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SonosTodayExtension/AEXML.framework"
@@ -102,4 +103,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SonosTodayExtension/RxSwift.framework"
   install_framework "Pods-SonosTodayExtension/SwiftClient.framework"
   install_framework "Pods-SonosTodayExtension/XCGLogger.framework"
+  install_framework "Pods-SonosTodayExtension/TMCache.framework"
 fi

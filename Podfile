@@ -31,6 +31,7 @@ target 'SonosTodayExtension' do
     pod 'AEXML', '~> 2.0.1'
     pod 'SwiftClient', '~> 2.0.2'
     pod 'ReachabilitySwift', '~> 2.3.3'
+    pod 'TMCache', '~> 2.1.0'
 end
 target 'sonos-widgetTests' do
 

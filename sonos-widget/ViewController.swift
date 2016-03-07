@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
 
     override func viewWillDisappear(animated: Bool) {
-        
+        self.disposeBag = DisposeBag()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,6 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate {
                         }, onError: { err -> Void in
                             logger.error("Error: \(err)")
                         }, onCompleted: nil, onDisposed: nil)
+                .addDisposableTo(disposeBag)
 
 
             }

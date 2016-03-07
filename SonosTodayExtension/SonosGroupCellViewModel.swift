@@ -7,8 +7,14 @@
 //
 import Foundation
 
-struct SonosGroupCellViewModel {
+class SonosGroupCellViewModel:NSObject {
     let title:String
     let locationUrl:String
     let groupState:String
+    
+    init(title:String, locationUrl:String, groupState:String) {
+        self.title = title
+        self.locationUrl = locationUrl
+        self.groupState = groupState
+    }
 }
