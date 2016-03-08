@@ -14,7 +14,8 @@ import RxCocoa
 import sonosclient
 
 class SonosGroupCell: UITableViewCell, SonosGroupView {
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var trackLabel: UILabel!
+    @IBOutlet weak var zoneLabel: UILabel!
     @IBOutlet weak var button: UIButton!
     var state:SonosGroupState?
     var disposeBag = DisposeBag()

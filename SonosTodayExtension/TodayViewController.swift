@@ -30,7 +30,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         super.viewDidLoad()
         self.tableView.dataSource = self.datasource
         self.tableView.delegate = self
-        self.tableView.rowHeight = 50.0
+        self.tableView.rowHeight = 75.0
         self.tableView.sectionFooterHeight = 5.0
         updateTableData(self.cachedViewModels)
     }

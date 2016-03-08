@@ -22,32 +22,40 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="102.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAc-PS-jCv">
-                                            <rect key="frame" x="244" y="40" width="76" height="22"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <state key="normal" image="Play"/>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ZoneGroupLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gu-iq-Yl4">
-                                            <rect key="frame" x="0.0" y="11" width="108" height="80"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TrackLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gu-iq-Yl4">
+                                            <rect key="frame" x="8" y="74" width="304" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ZoneLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ub-jU-QVh">
+                                            <rect key="frame" x="8" y="13" width="167.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAc-PS-jCv">
+                                            <rect key="frame" x="279" y="10" width="28" height="28"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" image="Play"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="wAc-PS-jCv" secondAttribute="trailing" constant="7" id="3rU-0V-Ugh"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="wAc-PS-jCv" secondAttribute="bottom" constant="-1.5" id="Cy0-xa-LTk"/>
-                                        <constraint firstItem="wAc-PS-jCv" firstAttribute="top" secondItem="Gvg-YG-k2J" secondAttribute="topMargin" constant="-1" id="IHP-5r-0Qr"/>
-                                        <constraint firstItem="0Gu-iq-Yl4" firstAttribute="top" secondItem="Gvg-YG-k2J" secondAttribute="topMargin" constant="3" id="Yzc-hf-hoa"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="0Gu-iq-Yl4" secondAttribute="bottom" constant="3.5" id="jIP-el-EdO"/>
-                                        <constraint firstItem="wAc-PS-jCv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Gu-iq-Yl4" secondAttribute="trailing" constant="8" id="n8n-O9-ITY"/>
-                                        <constraint firstItem="0Gu-iq-Yl4" firstAttribute="leading" secondItem="Gvg-YG-k2J" secondAttribute="leadingMargin" id="nM2-gh-Yb2"/>
+                                        <constraint firstItem="0Gu-iq-Yl4" firstAttribute="leading" secondItem="1Ub-jU-QVh" secondAttribute="leading" id="2iu-XO-hkg"/>
+                                        <constraint firstItem="wAc-PS-jCv" firstAttribute="centerY" secondItem="1Ub-jU-QVh" secondAttribute="centerY" id="MbR-qb-jwT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wAc-PS-jCv" secondAttribute="trailing" constant="5" id="Pxw-7X-av1"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="1Ub-jU-QVh" secondAttribute="leading" id="Wbn-kx-4MR"/>
+                                        <constraint firstItem="1Ub-jU-QVh" firstAttribute="top" secondItem="Gvg-YG-k2J" secondAttribute="topMargin" constant="5" id="XNP-Vg-Ir5"/>
+                                        <constraint firstItem="wAc-PS-jCv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1Ub-jU-QVh" secondAttribute="trailing" constant="5" id="is2-Pm-3IA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="0Gu-iq-Yl4" secondAttribute="bottom" constant="3.5" id="wCw-eG-3MY"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="0Gu-iq-Yl4" secondAttribute="trailing" id="woU-Zb-uvB"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="button" destination="wAc-PS-jCv" id="Km3-Gn-V2W"/>
-                                    <outlet property="label" destination="0Gu-iq-Yl4" id="zG1-g9-D46"/>
+                                    <outlet property="trackLabel" destination="0Gu-iq-Yl4" id="nr7-Xh-FBn"/>
+                                    <outlet property="zoneLabel" destination="1Ub-jU-QVh" id="t2t-9C-nUg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
