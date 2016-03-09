@@ -9,11 +9,13 @@ import Foundation
 
 class SonosGroupCellViewModel:NSObject {
     let title:String
+    let trackTitle:String
     let locationUrl:String
     let groupState:String
     
-    init(title:String, locationUrl:String, groupState:String) {
+    init(title:String, trackTitle:String, locationUrl:String, groupState:String) {
         self.title = title
+        self.trackTitle = trackTitle
         self.locationUrl = locationUrl
         self.groupState = groupState
     }

@@ -28,7 +28,7 @@ class TodayViewDataSource:NSObject, UITableViewDataSource {
             logger.info("tablecell for \(viewModel)")
             cell.initialize( viewModel.groupState, location: viewModel.locationUrl)
             cell.zoneLabel.text = viewModel.title
-            cell.trackLabel.text = "Track title"
+            cell.trackLabel.text = viewModel.trackTitle
         } else {
             cell.zoneLabel.text = "Ruh-roh"
         }

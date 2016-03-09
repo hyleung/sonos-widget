@@ -55,11 +55,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     element.uuid == group.groupCoordinator
                     }.first
                 let locationUrl = "http://\(coordinator!.location.host!):\(coordinator!.location.port!)"
-                return SonosApiClient
-                    .rx_getTransportInfo(locationUrl)
-                    .map{ (transportInfo:TransportInfo) -> SonosGroupCellViewModel in
-                        return SonosGroupCellViewModel(title:title!, locationUrl:locationUrl, groupState: transportInfo.transportState)
-                }
+                return
+                    Observable.zip(SonosApiClient.rx_getTransportInfo(locationUrl),
+                        SonosApiClient.getCurrentTrackMetaData(locationUrl),
+                        resultSelector: {(transportInfo:TransportInfo, trackInfo:TrackInfo) -> SonosGroupCellViewModel in
+                            return SonosGroupCellViewModel(title:title!, trackTitle:trackInfo.title, locationUrl:locationUrl, groupState: transportInfo.transportState)
+                        })
             }
             .toArray()
             .observeOn(MainScheduler.instance)
