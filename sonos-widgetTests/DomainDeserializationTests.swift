@@ -55,8 +55,8 @@ class DomainSerializationTests: XCTestCase {
 "    BehindWifiExtender='0' WifiEnabled='1' Orientation='0'" +
 "    SonarState='1'/></ZoneGroup>" +
 "    </ZoneGroups>"
-    
-    
+
+
     let zoneGroupMemberData =
     "   <ZoneGroupMember" +
     "    UUID='RINCON_B8E9373F6D2A01400'" +
@@ -68,8 +68,8 @@ class DomainSerializationTests: XCTestCase {
     "    WirelessMode='0' HasConfiguredSSID='1' ChannelFreq='2412'" +
     "    BehindWifiExtender='0' WifiEnabled='1' Orientation='3' " +
     "    SonarState='4'/>"
-    
-    
+
+
     func testZoneGroupDeserialization() {
         let zoneGroups = ZoneGroup.fromXml(zoneGroupsData)
         XCTAssertNotNil(zoneGroups)
@@ -79,13 +79,29 @@ class DomainSerializationTests: XCTestCase {
         XCTAssertEqual("RINCON_B8E9373F6D2A01400:3", groupOne?.id)
         XCTAssertNotNil(groupOne?.members)
     }
-    
+
     func testZoneGroupMemberDeserialization() {
         let zoneGroupMember = ZoneGroupMember.fromXml(zoneGroupMemberData)
         XCTAssertNotNil(zoneGroupMember)
     }
-    
+
+    func testDeDupe() {
+        let input = ["Living Room", "Dining Room", "Living Room"]
+        let result = input
+            .sort()
+            .reduce([String]()) { (acc:[String], value:String) -> [String] in
+                if let last = acc.last {
+                    if last != value {
+                        return acc + [value]
+                    } else {
+                        return acc
+                    }
+                } else {
+                    return [value]
+                }
+            }
+  
+        print("result \(result)")
+    }
+
 }
-
-
-

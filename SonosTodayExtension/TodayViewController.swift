@@ -50,7 +50,20 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             .flatMap{ (group:ZoneGroup) -> Observable<SonosGroupCellViewModel> in
                 let title = group.members?.map({ (member:ZoneGroupMember) -> String in
                     member.zoneName.unescapeXml()
-                }).joinWithSeparator(", ")
+                })
+                    .sort()
+                    .reduce([String]()) { (acc:[String], value:String) -> [String] in
+                        if let last = acc.last {
+                            if last != value {
+                                return acc + [value]
+                            } else {
+                                return acc
+                            }
+                        } else {
+                            return [value]
+                        }
+                    }
+                    .joinWithSeparator(", ")
                 let coordinator =  group.members?.filter{ (element:ZoneGroupMember) -> Bool in
                     element.uuid == group.groupCoordinator
                     }.first
