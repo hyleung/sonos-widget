@@ -48,21 +48,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         logger.info("performing update")
         discoveryObservable
             .flatMap{ (group:ZoneGroup) -> Observable<SonosGroupCellViewModel> in
-                let title = group.members?.map({ (member:ZoneGroupMember) -> String in
-                    member.zoneName.unescapeXml()
-                })
-                    .sort()
-                    .reduce([String]()) { (acc:[String], value:String) -> [String] in
-                        if let last = acc.last {
-                            if last != value {
-                                return acc + [value]
-                            } else {
-                                return acc
-                            }
-                        } else {
-                            return [value]
-                        }
+                let title = group.members?
+                    .filter{ member in
+                        !member.isInvisible
                     }
+                    .map{ (member:ZoneGroupMember) -> String in
+                        member.zoneName.unescapeXml()
+                    }
+                    .sort()
                     .joinWithSeparator(", ")
                 let coordinator =  group.members?.filter{ (element:ZoneGroupMember) -> Bool in
                     element.uuid == group.groupCoordinator

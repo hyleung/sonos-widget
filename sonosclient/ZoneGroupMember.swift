@@ -13,13 +13,15 @@ public struct ZoneGroupMember {
     public let zoneName:String
     public let uuid:String
     public let location:NSURL
+    public let isInvisible:Bool
     
     public static func fromZoneGroupMemberElement(element:AEXMLElement) -> ZoneGroupMember? {
         if  let zoneName = element.attributes["ZoneName"],
             let uuid = element.attributes["UUID"],
             let location = element.attributes["Location"],
             let locationUrl = NSURL(string:location) {
-                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: locationUrl)
+                let invisible = element.attributes["Invisible"] != nil
+                return ZoneGroupMember(zoneName: zoneName, uuid: uuid, location: locationUrl, isInvisible:invisible)
         } else {
             return .None
         }

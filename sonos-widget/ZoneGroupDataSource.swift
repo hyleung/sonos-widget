@@ -18,14 +18,18 @@ class ZoneGroupDataSource:NSObject, UITableViewDataSource {
         return data?.count ?? 0
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data?[section].members?.count ?? 0
+        let members = self.data?[section].members?.filter{ member in !member.isInvisible }
+        return members?.count ?? 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("GroupMemberCell", forIndexPath: indexPath)
-        if let zoneGroupMember = data?[indexPath.section].members?[indexPath.row] {
-            //logger.info(zoneGroup.id)
-            cell.textLabel?.text = "\(zoneGroupMember.zoneName.unescapeXml())"
+        if  let zoneGroup = data?[indexPath.section] {
+            let members = zoneGroup.members?.filter{ member in !member.isInvisible }
+            if let zoneGroupMember = members?[indexPath.row] {
+                //logger.info(zoneGroup.id)
+                cell.textLabel?.text = "\(zoneGroupMember.zoneName.unescapeXml())"
+            }
         } else {
             cell.textLabel?.text = "ruh-roh"
         }
