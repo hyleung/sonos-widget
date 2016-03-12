@@ -70,8 +70,14 @@ class ViewController: UIViewController, UITableViewDelegate {
                             let state = element.0
                             let trackInfo = element.1
                             logger.info("Group state: \(state)")
-                            headerCell.headerLabel.text = trackInfo.title
-                            headerCell.artistLabel.text = trackInfo.artist
+                            if trackInfo.protocolInfo.containsString("radio") {
+                                headerCell.headerLabel.text = "Radio"
+                                headerCell.artistLabel.text = ""
+                            } else {
+                                headerCell.headerLabel.text = trackInfo.title
+                                headerCell.artistLabel.text = trackInfo.artist
+                            }
+
                             ViewController.updateHeaderCell(headerCell, groupState: state.transportState, location: locationUrl)
                         
                         }, onError: { err -> Void in

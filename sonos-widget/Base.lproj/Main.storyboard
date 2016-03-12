@@ -19,11 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTV-aJ-ANB">
-                                <rect key="frame" x="328" y="28" width="53" height="30"/>
+                                <rect key="frame" x="336" y="28" width="53" height="30"/>
                                 <state key="normal" title="Refresh"/>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="j2e-jr-gr2">
-                                <rect key="frame" x="303" y="33" width="20" height="20"/>
+                                <rect key="frame" x="311" y="33" width="20" height="20"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9rX-ps-QC9">
                                 <rect key="frame" x="20" y="39" width="374" height="658"/>
@@ -55,9 +55,9 @@
                                                     <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                                     <state key="normal" image="Play"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCk-m0-kYC">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCk-m0-kYC">
                                                     <rect key="frame" x="18" y="31" width="68" height="13.5"/>
-                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -91,7 +91,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9rX-ps-QC9" secondAttribute="bottom" constant="20" id="FWb-87-n9U"/>
                             <constraint firstItem="KTV-aJ-ANB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Jcn-lm-5yp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9rX-ps-QC9" secondAttribute="trailing" id="S6i-ro-bai"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="KTV-aJ-ANB" secondAttribute="trailing" constant="13" id="Y4h-nk-18J"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KTV-aJ-ANB" secondAttribute="trailing" constant="5" id="Y4h-nk-18J"/>
                             <constraint firstItem="KTV-aJ-ANB" firstAttribute="leading" secondItem="j2e-jr-gr2" secondAttribute="trailing" constant="5" id="kqu-YO-ozy"/>
                             <constraint firstItem="j2e-jr-gr2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="13" id="nev-Qh-rxn"/>
                         </constraints>

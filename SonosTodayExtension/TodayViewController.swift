@@ -65,7 +65,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
                     Observable.zip(SonosApiClient.rx_getTransportInfo(locationUrl),
                         SonosApiClient.getCurrentTrackMetaData(locationUrl),
                         resultSelector: {(transportInfo:TransportInfo, trackInfo:TrackInfo) -> SonosGroupCellViewModel in
-                            return SonosGroupCellViewModel(title:title!, trackTitle:trackInfo.title, locationUrl:locationUrl, groupState: transportInfo.transportState)
+                            let trackTitle = trackInfo.protocolInfo.containsString("radio") ? "Radio" : trackInfo.title
+                            return SonosGroupCellViewModel(title:title!, trackTitle:trackTitle, locationUrl:locationUrl, groupState: transportInfo.transportState)
                         })
             }
             .toArray()
