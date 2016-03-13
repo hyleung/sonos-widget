@@ -123,13 +123,14 @@ public class SonosApiClient {
                 return Observable.just(AEXMLDocument())
             })
             .flatMap{(doc:AEXMLDocument) -> Observable<TrackInfo> in
-                if let title = doc["DIDL-Lite"]["item"]["dc:title"].value,
-                    let creator = doc["DIDL-Lite"]["item"]["dc:creator"].value,
-                    let protocolInfo = doc["DIDL-Lite"]["item"]["res"].attributes["protocolInfo"] {
-                        if (title.containsString("not found") && creator.containsString("not found")) {
-                            return Observable.just(TrackInfo(title: "No track", artist:.None, protocolInfo:protocolInfo))
-                        }
-                        return Observable.just(TrackInfo(title: title, artist: creator, protocolInfo:protocolInfo))
+                let item = doc["DIDL-Lite"]["item"]
+                if  let protocolInfo = item["res"].attributes["protocolInfo"] {
+                        let title = item["dc:title"].optional() ?? "No track"
+                        let creator = item["dc:creator"].optional()
+                        let albumArt = item["upnp:albumArtURI"].optional()?
+                            .stringByReplacingOccurrencesOfString("&amp;", withString: "&")
+
+                        return Observable.just(TrackInfo(title: title, artist: creator, protocolInfo:protocolInfo, albumArt: albumArt))
                 }
                 return Observable.empty()
             }
