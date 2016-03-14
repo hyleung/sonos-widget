@@ -34,6 +34,7 @@
 		F0C5E92C1C7D60A3002E9F02 /* SonosTodayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C5E92B1C7D60A3002E9F02 /* SonosTodayExtension.swift */; };
 		F0C5E92E1C7EAD4C002E9F02 /* SonosGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C5E92D1C7EAD4C002E9F02 /* SonosGroupCell.swift */; };
 		F0CA958B1C9490B8005AA971 /* AEXMLElement+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CA958A1C9490B8005AA971 /* AEXMLElement+Optional.swift */; };
+		F0CA958D1C965C92005AA971 /* ZoneGroupHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0CA958C1C965C92005AA971 /* ZoneGroupHeaderCell.xib */; };
 		F0CFA5A51C5DB212008491FE /* ZoneGroupDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CFA5A41C5DB212008491FE /* ZoneGroupDataSource.swift */; };
 		F0F1405B1C7968DD009CCC5D /* ZoneGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06FB9591C5719DC00473B32 /* ZoneGroup.swift */; };
 		F0F1405C1C7968DD009CCC5D /* ZoneGroupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06FB95D1C58879800473B32 /* ZoneGroupMember.swift */; };
@@ -157,6 +158,7 @@
 		F0C5E92D1C7EAD4C002E9F02 /* SonosGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonosGroupCell.swift; sourceTree = "<group>"; };
 		F0C9160F1C86992A00C1EE87 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F0CA958A1C9490B8005AA971 /* AEXMLElement+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AEXMLElement+Optional.swift"; sourceTree = "<group>"; };
+		F0CA958C1C965C92005AA971 /* ZoneGroupHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZoneGroupHeaderCell.xib; sourceTree = "<group>"; };
 		F0CFA5A41C5DB212008491FE /* ZoneGroupDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneGroupDataSource.swift; sourceTree = "<group>"; };
 		F0D0BB231C3F796D00D4850E /* RxGCDAsyncUdpSocketDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxGCDAsyncUdpSocketDelegateProxy.swift; path = ../sonosclient/RxGCDAsyncUdpSocketDelegateProxy.swift; sourceTree = "<group>"; };
 		F0D0BB251C3F79AE00D4850E /* GCDAsyncUdpSocket+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GCDAsyncUdpSocket+Rx.swift"; path = "../sonosclient/GCDAsyncUdpSocket+Rx.swift"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				F0A240A61C65C00100E364B8 /* ZoneGroupHeaderCell.swift */,
 				F01F6D2A1C6D885B00E46C12 /* ZoneGroupHeaderState.swift */,
+				F0CA958C1C965C92005AA971 /* ZoneGroupHeaderCell.xib */,
 			);
 			name = GroupHeader;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0CA958D1C965C92005AA971 /* ZoneGroupHeaderCell.xib in Resources */,
 				F02C42D71C2FB09D00E4F20C /* Assets.xcassets in Resources */,
 				F02C42D51C2FB09D00E4F20C /* Main.storyboard in Resources */,
 			);

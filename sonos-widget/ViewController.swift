@@ -26,6 +26,9 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.registerNib(UINib(nibName: "ZoneGroupHeaderCell", bundle: nil), forCellReuseIdentifier: "GroupHeaderCell")
+
+
         self.tableView.dataSource = self.datasource
         self.tableView.delegate = self
         activityIndicator.hidden = true
@@ -45,7 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell = self.tableView?.dequeueReusableCellWithIdentifier("ZoneGroupCell") as! ZoneGroupHeaderCell
+        let headerCell = self.tableView?.dequeueReusableCellWithIdentifier("GroupHeaderCell") as! ZoneGroupHeaderCell
         if let zoneGroup = datasource.data?[section] {
             if let coordinator = zoneGroup.members?.filter({ member in
                 return member.uuid == zoneGroup.groupCoordinator

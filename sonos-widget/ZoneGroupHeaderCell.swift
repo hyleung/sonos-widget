@@ -19,6 +19,7 @@ class ZoneGroupHeaderCell: UITableViewCell, ZoneGroupHeaderView {
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var zoneGroupStateButon: UIButton!
+    @IBOutlet weak var albumArtImageView: UIImageView!
     override func willMoveToSuperview(newSuperview: UIView?) {
         zoneGroupStateButon.rx_tap.subscribeNext { () -> Void in
             self.state?.advance(self)

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="PaG-U9-z7b" customClass="ZoneGroupHeaderCell" customModule="sonos_widget" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="510" height="116"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PaG-U9-z7b" id="2jw-pt-WXb">
+                <rect key="frame" x="0.0" y="0.0" width="510" height="115.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IW9-G0-fsN">
+                        <rect key="frame" x="13" y="44.5" width="42" height="22.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYk-gr-CAm">
+                        <rect key="frame" x="474" y="16" width="28" height="28"/>
+                        <state key="normal" image="Play"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BK7-z6-aVP">
+                        <rect key="frame" x="13" y="16" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="nYk-gr-CAm" firstAttribute="top" secondItem="BK7-z6-aVP" secondAttribute="top" id="5QF-vc-B2l"/>
+                    <constraint firstItem="IW9-G0-fsN" firstAttribute="trailing" secondItem="BK7-z6-aVP" secondAttribute="trailing" id="CNz-QU-DWO"/>
+                    <constraint firstItem="nYk-gr-CAm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BK7-z6-aVP" secondAttribute="trailing" constant="15" id="DbD-la-pkO"/>
+                    <constraint firstItem="IW9-G0-fsN" firstAttribute="leading" secondItem="BK7-z6-aVP" secondAttribute="leading" id="RWg-Gr-ggd"/>
+                    <constraint firstItem="IW9-G0-fsN" firstAttribute="top" secondItem="BK7-z6-aVP" secondAttribute="bottom" constant="5" id="kVm-Gi-4ue"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="nYk-gr-CAm" secondAttribute="trailing" id="nFL-Cf-gpe"/>
+                    <constraint firstItem="BK7-z6-aVP" firstAttribute="top" secondItem="2jw-pt-WXb" secondAttribute="topMargin" constant="8" id="oHV-O9-eoL"/>
+                    <constraint firstItem="BK7-z6-aVP" firstAttribute="leading" secondItem="2jw-pt-WXb" secondAttribute="leadingMargin" constant="5" id="wze-OT-LOf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="artistLabel" destination="IW9-G0-fsN" id="A4F-RQ-FrZ"/>
+                <outlet property="headerLabel" destination="BK7-z6-aVP" id="AWP-Ia-cbo"/>
+                <outlet property="zoneGroupStateButon" destination="nYk-gr-CAm" id="Cfb-eX-Nga"/>
+            </connections>
+            <point key="canvasLocation" x="315" y="294"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Play" width="28" height="28"/>
+    </resources>
+</document>
