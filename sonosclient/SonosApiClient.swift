@@ -129,13 +129,30 @@ public class SonosApiClient {
                         let creator = item["dc:creator"].optional()
                         let albumArt = item["upnp:albumArtURI"].optional()?
                             .stringByReplacingOccurrencesOfString("&amp;", withString: "&")
-
-                        return Observable.just(TrackInfo(title: title, artist: creator, protocolInfo:protocolInfo, albumArt: albumArt))
+                        logger.info("Album art: \(albumArt)")
+                        if let u = albumArt {
+                            return getAlbumArt(location, uri: u).map{ data -> TrackInfo in
+                                TrackInfo(title: title, artist: creator, protocolInfo:protocolInfo, albumArt: data)
+                            }
+                        }
+                        return Observable.just(TrackInfo(title: title, artist: creator, protocolInfo:protocolInfo, albumArt: .None))
                 }
                 return Observable.empty()
             }
     }
-    
+
+    public static func getAlbumArt(location:String, uri:String) -> Observable<NSData> {
+        let imageUrl = "\(location)\(uri)"
+        return Observable.create{ subscriber -> Disposable in
+            if let imageNSUrl = NSURL(string: imageUrl),
+                let data = NSData(contentsOfURL: imageNSUrl) {
+                subscriber.onNext(data)
+            }
+            subscriber.onCompleted()
+            return NopDisposable.instance
+        }
+    }
+
     public static func toXmlDocument(data:NSData) -> Observable<AEXMLDocument> {
         do {
             // logger.debug(data.asXmlDocument()?.xmlString)

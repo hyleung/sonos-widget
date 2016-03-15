@@ -10,8 +10,8 @@ public struct TrackInfo {
     public let title:String
     public let artist:String?
     public let protocolInfo:String
-    public let albumArt:String?
-    public init(title:String, artist:String?, protocolInfo:String, albumArt:String?) {
+    public let albumArt:NSData?
+    public init(title:String, artist:String?, protocolInfo:String, albumArt:NSData?) {
         self.title = title
         self.artist = artist
         self.protocolInfo = protocolInfo

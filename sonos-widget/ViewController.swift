@@ -80,6 +80,10 @@ class ViewController: UIViewController, UITableViewDelegate {
                                 headerCell.headerLabel.text = trackInfo.title
                                 headerCell.artistLabel.text = trackInfo.artist
                             }
+                            if let imageData = trackInfo.albumArt,
+                                let image = UIImage(data:imageData) {
+                                //headerCell.albumArtImageView.image = image
+                            }
 
                             ViewController.updateHeaderCell(headerCell, groupState: state.transportState, location: locationUrl)
                         
