@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -15,19 +16,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="510" height="115.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IW9-G0-fsN">
-                        <rect key="frame" x="13" y="44.5" width="42" height="22.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYk-gr-CAm">
                         <rect key="frame" x="474" y="16" width="28" height="28"/>
                         <state key="normal" image="Play"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BK7-z6-aVP">
-                        <rect key="frame" x="13" y="16" width="42" height="20.5"/>
+                        <rect key="frame" x="115.5" y="16" width="41.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WQ1-qp-B69">
+                        <rect key="frame" x="8" y="8" width="99.5" height="99.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="WQ1-qp-B69" secondAttribute="height" multiplier="1:1" id="aMI-io-0VZ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IW9-G0-fsN">
+                        <rect key="frame" x="115.5" y="41.5" width="41.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -36,15 +43,19 @@
                 <constraints>
                     <constraint firstItem="nYk-gr-CAm" firstAttribute="top" secondItem="BK7-z6-aVP" secondAttribute="top" id="5QF-vc-B2l"/>
                     <constraint firstItem="IW9-G0-fsN" firstAttribute="trailing" secondItem="BK7-z6-aVP" secondAttribute="trailing" id="CNz-QU-DWO"/>
-                    <constraint firstItem="nYk-gr-CAm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BK7-z6-aVP" secondAttribute="trailing" constant="15" id="DbD-la-pkO"/>
                     <constraint firstItem="IW9-G0-fsN" firstAttribute="leading" secondItem="BK7-z6-aVP" secondAttribute="leading" id="RWg-Gr-ggd"/>
+                    <constraint firstItem="nYk-gr-CAm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BK7-z6-aVP" secondAttribute="trailing" constant="8" id="eFa-n7-dJd"/>
+                    <constraint firstItem="WQ1-qp-B69" firstAttribute="top" secondItem="2jw-pt-WXb" secondAttribute="topMargin" id="jIT-c8-Pa1"/>
                     <constraint firstItem="IW9-G0-fsN" firstAttribute="top" secondItem="BK7-z6-aVP" secondAttribute="bottom" constant="5" id="kVm-Gi-4ue"/>
+                    <constraint firstItem="BK7-z6-aVP" firstAttribute="leading" secondItem="WQ1-qp-B69" secondAttribute="trailing" constant="8" id="m7M-qu-wWk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="nYk-gr-CAm" secondAttribute="trailing" id="nFL-Cf-gpe"/>
                     <constraint firstItem="BK7-z6-aVP" firstAttribute="top" secondItem="2jw-pt-WXb" secondAttribute="topMargin" constant="8" id="oHV-O9-eoL"/>
-                    <constraint firstItem="BK7-z6-aVP" firstAttribute="leading" secondItem="2jw-pt-WXb" secondAttribute="leadingMargin" constant="5" id="wze-OT-LOf"/>
+                    <constraint firstItem="WQ1-qp-B69" firstAttribute="leading" secondItem="2jw-pt-WXb" secondAttribute="leadingMargin" id="xgT-sw-Zf9"/>
+                    <constraint firstItem="WQ1-qp-B69" firstAttribute="bottom" secondItem="2jw-pt-WXb" secondAttribute="bottomMargin" id="yLE-MF-4ON"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="albumArtImageView" destination="WQ1-qp-B69" id="U6l-Hm-hvO"/>
                 <outlet property="artistLabel" destination="IW9-G0-fsN" id="A4F-RQ-FrZ"/>
                 <outlet property="headerLabel" destination="BK7-z6-aVP" id="AWP-Ia-cbo"/>
                 <outlet property="zoneGroupStateButon" destination="nYk-gr-CAm" id="Cfb-eX-Nga"/>
